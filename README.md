@@ -1,2 +1,2 @@
-# packaging
+# Packaging
 Linux packaging data and scripts
