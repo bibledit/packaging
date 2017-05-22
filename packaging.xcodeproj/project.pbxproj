@@ -6,10 +6,15 @@
 	objectVersion = 46;
 	objects = {
 
+/* Begin PBXFileReference section */
+		CA27F3A41ED3682A003F4813 /* client-debian */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "client-debian"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
 /* Begin PBXGroup section */
 		CA6867431B03997100DB9422 = {
 			isa = PBXGroup;
 			children = (
+				CA27F3A41ED3682A003F4813 /* client-debian */,
 			);
 			sourceTree = "<group>";
 		};
