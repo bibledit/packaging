@@ -1,3 +1,9 @@
+bibledit (5.0.190-1) unstable; urgency=low
+
+  * new upstream version
+
+ -- Teus Benschop <teusjannette@gmail.com>  Tue, 23 May 2017 10:40:00 +0200
+
 bibledit (5.0.145-1) experimental; urgency=low
 
   * debian/control: updated Build-Depends, Section, Priority, Standards-Version

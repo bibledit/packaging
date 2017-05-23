@@ -35,24 +35,11 @@ if [ $? -ne 0 ]; then exit; fi
 LINUXSOURCE=`dirname $0`
 cd $LINUXSOURCE
 LINUXSOURCE=`pwd`
-echo Using source at $LINUXSOURCE
+echo Using Debian packaging source at $LINUXSOURCE.
 
 
-./tarball.sh
-TMPLINUX=/tmp/bibledit-linux
-echo It supposes a tarball to be there in $TMPLINUX.
-
-
-TMPDEBIAN=/tmp/bibledit-debian
-echo Unpack the tarball in $TMPLINUX.
-rm -rf $TMPDEBIAN
-mkdir $TMPDEBIAN
-cd $TMPDEBIAN
-if [ $? -ne 0 ]; then exit; fi
-tar xf $TMPLINUX/bibledit*gz
-if [ $? -ne 0 ]; then exit; fi
-cd bibledit*
-if [ $? -ne 0 ]; then exit; fi
+echo Remove unwanted files from the Debian packaging.
+find . -name .DS_Store -delete
 
 
 # The script unpacks the Bibledit Linux tarball,
@@ -61,6 +48,22 @@ if [ $? -ne 0 ]; then exit; fi
 # differences between the supplied tarball and the modified source.
 # dpkg-source: error: aborting due to unexpected upstream changes
 # Another reason is that in this way it does not need to generate patches in the 'debian' folder.
+
+
+echo Unpack the tarball assumed to be created for the Bibledit Linux client.
+TMPDEBIAN=/tmp/bibledit-debian
+rm -rf $TMPDEBIAN
+mkdir $TMPDEBIAN
+cd $TMPDEBIAN
+if [ $? -ne 0 ]; then exit; fi
+tar xf /tmp/bibledit-linux/bibledit*gz
+if [ $? -ne 0 ]; then exit; fi
+cd bibledit*
+if [ $? -ne 0 ]; then exit; fi
+
+
+echo Copy the Debian packaging source to $TMPDEBIAN
+cp -r $LINUXSOURCE/debian .
 
 
 # echo Link with the system-provided mbed TLS library.
@@ -165,20 +168,20 @@ echo Change directory back to $LINUXSOURCE
 cd $LINUXSOURCE
 
 
-echo Copying debian repository from macOS to sid.
-rsync --archive -v --delete ../debian $DEBIANSID:.
+echo Copying Bibledit repository at alioth from macOS to sid.
+rsync --archive -v --delete ../../alioth/bibledit-gtk $DEBIANSID:.
 if [ $? -ne 0 ]; then exit; fi
 
 
 echo Remove untracked files from the working tree.
-ssh -tt $DEBIANSID "cd debian; git clean -f"
+ssh -tt $DEBIANSID "cd bibledit-gtk; git clean -f"
 if [ $? -ne 0 ]; then exit; fi
 
 
 echo Import upstream tarball and use pristine-tar.
-ssh -tt $DEBIANSID "cd debian; gbp import-dsc --create-missing-branches --pristine-tar ../bibledit_*.dsc"
+ssh -tt $DEBIANSID "cd bibledit-gtk; gbp import-dsc --create-missing-branches --pristine-tar ../bibledit_*.dsc"
 if [ $? -ne 0 ]; then exit; fi
 
 
-echo Run ./debianupload.sh to build and upload source package to mentors.
-echo Run ./debianpush.sh to push the changes to the remote debian repository.
+echo Run ./mentors.sh to build and upload source package to mentors.
+echo Run ./alioth.sh to push the changes to the debian repository at Alioth.
