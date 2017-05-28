@@ -117,7 +117,12 @@ echo Remove some files from the core library
 # Delete it so it can't be used accidentially.
 rm bibledit
 if [ $? -ne 0 ]; then exit; fi
-
+rm generate
+if [ $? -ne 0 ]; then exit; fi
+rm valgrind
+if [ $? -ne 0 ]; then exit; fi
+rm dev
+if [ $? -ne 0 ]; then exit; fi
 
 
 echo Reconfiguring the source.
@@ -222,7 +227,7 @@ if [ $? -ne 0 ]; then exit; fi
 
 
 echo Import upstream tarball and use pristine-tar.
-ssh -tt $DEBIANSID "cd bibledit-gtk; gbp import-dsc --create-missing-branches --pristine-tar ../bibledit_*.dsc"
+ssh -tt $DEBIANSID "cd bibledit-gtk; gbp import-dsc --create-missing-branches --pristine-tar ../bibledit-cloud_*.dsc"
 if [ $? -ne 0 ]; then exit; fi
 
 
