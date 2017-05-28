@@ -38,6 +38,10 @@ DEBIANSOURCE=`pwd`
 echo Using Debian packaging source at $DEBIANSOURCE.
 
 
+# If the debian/README* or README.Debian files contain no useful content,
+# they should be updated with something useful, or else be removed.
+
+
 echo Remove unwanted files from the Debian packaging.
 find . -name .DS_Store -delete
 echo Remove macOS extended attributes fromm the packaging.
@@ -81,10 +85,6 @@ cd bibledit*
 if [ $? -ne 0 ]; then exit; fi
 
 
-# If the debian/README* or README.Debian files contain no useful content,
-# they should be updated with something useful, or else be removed.
-
-
 echo Copy the Debian packaging source to $TMPDEBIAN
 cp -r $DEBIANSOURCE/debian .
 
@@ -109,6 +109,15 @@ sed -i.bak '/generate_/d' Makefile.am
 if [ $? -ne 0 ]; then exit; fi
 rm Makefile.am.bak
 if [ $? -ne 0 ]; then exit; fi
+
+
+echo Remove some files from the core library
+# It does not use the "bibledit" shell script.
+# That script writes to the crontab.
+# Delete it so it can't be used accidentially.
+rm bibledit
+if [ $? -ne 0 ]; then exit; fi
+
 
 
 echo Reconfiguring the source.
