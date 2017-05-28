@@ -231,6 +231,6 @@ ssh -tt $DEBIANSID "cd bibledit-gtk; gbp import-dsc --create-missing-branches --
 if [ $? -ne 0 ]; then exit; fi
 
 
-echo Run ./mentors.sh to build and upload source package to mentors.
+# Todo echo Run ./mentors.sh to build and upload source package to mentors.
 # Todo echo Run ./alioth.sh to push the changes to the debian repository at Alioth.
 say Ready
