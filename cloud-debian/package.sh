@@ -40,14 +40,21 @@ echo Using Debian packaging source at $DEBIANSOURCE.
 
 echo Remove unwanted files from the Debian packaging.
 find . -name .DS_Store -delete
+echo Remove macOS extended attributes fromm the packaging.
+# The attributes would make their way into the tarball,
+# get unpacked within Debian,
+# and would cause lintian errors.
+xattr -r -c *
 
 
-echo Create a tarball of the core cloud library.
+echo Remove macOS extended attributes fromm the core cloud library.
 CLOUDSOURCE="../../cloud"
 pushd $CLOUDSOURCE
 CLOUDSOURCE=`pwd`
-# Todo rm -f bibledit*gz
-# Todo make dist
+xattr -r -c *
+echo Create a tarball of the core cloud library.
+rm -f bibledit*gz
+make dist
 if [ $? -ne 0 ]; then exit; fi
 popd
 
@@ -61,9 +68,11 @@ popd
 
 
 TMPDEBIAN=/tmp/bibledit-debian
-echo Unpack the tarball in the working folder $TMPDEBIAN.
+echo Unpack the tarball in working folder $TMPDEBIAN.
 rm -rf $TMPDEBIAN
+if [ $? -ne 0 ]; then exit; fi
 mkdir $TMPDEBIAN
+if [ $? -ne 0 ]; then exit; fi
 cd $TMPDEBIAN
 if [ $? -ne 0 ]; then exit; fi
 tar xf $CLOUDSOURCE/bibledit*gz
@@ -72,35 +81,34 @@ cd bibledit*
 if [ $? -ne 0 ]; then exit; fi
 
 
+# If the debian/README* or README.Debian files contain no useful content,
+# they should be updated with something useful, or else be removed.
+
+
 echo Copy the Debian packaging source to $TMPDEBIAN
 cp -r $DEBIANSOURCE/debian .
 
 
-echo Change \"bibledit\" to \"bibledit-cloud\" in some code.
+echo Change \"bibledit\" to \"bibledit-cloud\" in configuring code.
 sed -i.bak 's/share\/bibledit/share\/bibledit-cloud/g' configure.ac
+if [ $? -ne 0 ]; then exit; fi
+sed -i.bak 's/\[bibledit\]/\[bibledit-cloud\]/g' configure.ac
+if [ $? -ne 0 ]; then exit; fi
+rm configure.ac.bak
 if [ $? -ne 0 ]; then exit; fi
 
 
-
-exit
-
-
-
-
-
-# echo Link with the system-provided mbed TLS library.
-# Fix for lintian error "embedded-library usr/bin/bibledit: mbedtls":
-# * Remove mbedtls from the list of sources to compile.
-# * Add -lmbedtls and friends to the linker flags.
-# sed -i.bak '/mbedtls\//d' Makefile.am
-# if [ $? -ne 0 ]; then exit; fi
-# sed -i.bak 's/# debian//g' Makefile.am
-# if [ $? -ne 0 ]; then exit; fi
-# rm *.bak
-
-
-# If the debian/README* or README.Debian files contain no useful content,
-# they should be updated with something useful, or else be removed.
+echo Set the name of the binary to bibledit-cloud.
+sed -i.bak 's/.*PROGRAMS.*/bin_PROGRAMS = bibledit-cloud/' Makefile.am
+if [ $? -ne 0 ]; then exit; fi
+sed -i.bak 's/server_/bibledit_cloud_/g' Makefile.am
+if [ $? -ne 0 ]; then exit; fi
+sed -i.bak '/unittest_/d' Makefile.am
+if [ $? -ne 0 ]; then exit; fi
+sed -i.bak '/generate_/d' Makefile.am
+if [ $? -ne 0 ]; then exit; fi
+rm Makefile.am.bak
+if [ $? -ne 0 ]; then exit; fi
 
 
 echo Reconfiguring the source.
@@ -127,14 +135,18 @@ if [ $? -ne 0 ]; then exit; fi
 echo Configure and clean the source.
 ./configure
 if [ $? -ne 0 ]; then exit; fi
+pkgdata/create.sh
+if [ $? -ne 0 ]; then exit; fi
 make distclean
 if [ $? -ne 0 ]; then exit; fi
 
 
-echo Create updated tarball for Debian.
+echo Create updated renamed tarball for Debian.
 cd $TMPDEBIAN
-TARDIR=`ls`
-tar czf $TARDIR.tar.gz $TARDIR
+OLDTARDIR=`ls`
+NEWTARDIR=${OLDTARDIR/bibledit/bibledit-cloud}
+mv $OLDTARDIR $NEWTARDIR
+tar czf $NEWTARDIR.tar.gz $NEWTARDIR
 if [ $? -ne 0 ]; then exit; fi
 
 
@@ -151,7 +163,7 @@ if [ $? -ne 0 ]; then exit; fi
 
 
 echo Rename the source tarball to the non-native scheme.
-ssh $DEBIANSID "rename 's/-/_/g' bibledit*gz"
+ssh $DEBIANSID "rename 's/cloud-/cloud_/g' bibledit*gz"
 if [ $? -ne 0 ]; then exit; fi
 ssh $DEBIANSID "rename 's/tar/orig.tar/g' bibledit*gz"
 if [ $? -ne 0 ]; then exit; fi
@@ -180,9 +192,9 @@ ssh -tt $DEBIANSID "lintian --display-info --pedantic --no-tag-display-limit --i
 
 echo Build the Debian package in a chroot.
 # Builds for upload to unstable.
-# ssh -tt $DEBIANSID "cd bibledit*[0-9]; sbuild"
+ssh -tt $DEBIANSID "cd bibledit*[0-9]; sbuild"
 # Builds for upload to experimental.
-ssh -tt $DEBIANSID "cd bibledit*[0-9]; sbuild -d experimental -c unstable-amd64-sbuild"
+# ssh -tt $DEBIANSID "cd bibledit*[0-9]; sbuild -d experimental -c unstable-amd64-sbuild"
 if [ $? -ne 0 ]; then exit; fi
 
 
@@ -190,7 +202,7 @@ echo Change directory back to $DEBIANSOURCE
 cd $DEBIANSOURCE
 
 
-echo Copying Bibledit repository at alioth from macOS to sid.
+echo Copying Bibledit repository at alioth from macOS to sid. Todo use a new repository.
 rsync --archive -v --delete ../../alioth/bibledit-gtk $DEBIANSID:.
 if [ $? -ne 0 ]; then exit; fi
 
@@ -206,4 +218,5 @@ if [ $? -ne 0 ]; then exit; fi
 
 
 echo Run ./mentors.sh to build and upload source package to mentors.
-echo Run ./alioth.sh to push the changes to the debian repository at Alioth.
+# Todo echo Run ./alioth.sh to push the changes to the debian repository at Alioth.
+say Ready
