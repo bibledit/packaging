@@ -8,9 +8,9 @@
 # Here is the link to the issue: https://github.com/bibledit/bibledit/issues/499
 # By the way, isn't it called "mbed" TLS, obviously intended to be "embedded"?
 # So Bibledit is doing that right now, it "embeds" mbed TLS.
-bibledit: embedded-library usr/bin/bibledit: mbedtls
+bibledit-cloud: embedded-library usr/bin/bibledit-cloud: mbedtls
 
 # Override pedantic lintian messages.
-bibledit: hardening-no-fortify-functions
-bibledit: spelling-error-in-binary usr/bin/bibledit ment meant
-bibledit: hardening-no-bindnow usr/bin/bibledit
+bibledit-cloud: hardening-no-fortify-functions
+bibledit-cloud: spelling-error-in-binary usr/bin/bibledit-cloud ment meant
+bibledit-cloud: hardening-no-bindnow usr/bin/bibledit-cloud

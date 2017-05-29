@@ -6,8 +6,8 @@
 # It finds "make" called in file debian/rules.
 # However Bibledit does not use this interpreter directly.
 # Therefore it can be overridden.
-bibledit-data: missing-dep-for-interpreter make => make | build-essential | dpkg-dev (usr/share/bibledit/debian/rules)
+bibledit-cloud-data: missing-dep-for-interpreter make => make | build-essential | dpkg-dev (usr/share/bibledit-cloud/debian/rules)
 
 # Override pedantic lintian messages.
-bibledit-data: font-in-non-font-package
-bibledit-data: package-contains-empty-directory
+bibledit-cloud-data: font-in-non-font-package
+bibledit-cloud-data: package-contains-empty-directory
