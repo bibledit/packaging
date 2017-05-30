@@ -15,7 +15,8 @@ Vcs-Browser: https://anonscm.debian.org/cgit/pkg-crosswire/bibledit-cloud.git/
 
 Package: bibledit-cloud
 Architecture: any
-Depends: bibledit-cloud-data, ${shlibs:Depends}, ${misc:Depends}, fonts-sil-ezra, adduser
+Depends: bibledit-cloud-data, ${shlibs:Depends}, ${misc:Depends}, adduser
+Recommends: fonts-sil-ezra, libsword-utils
 Description: Bible editor server
  An online tool for the Bible translator.
  Translate Bibles.

@@ -1,6 +1,7 @@
 # The tool "lintian-overrider" makes it trivial
 # to find the way of overriding a lintian message.
-# $ lintian *.changes | ./lintian-utils/bin/lintian-overrider
+# $ lintian --pedantic --no-tag-display-limit bibledit*changes bibledit*deb bibledit*dsc | ./lintian-utils/bin/lintian-overrider
+# git clone git://anonscm.debian.org/users/nthykier/lintian-utils.git
 
 # For just now the mbed TLS library is included.
 # When using the system-provided libmbedtls, there currently is a segmentation fault.
@@ -14,3 +15,9 @@ bibledit-cloud: embedded-library usr/bin/bibledit-cloud: mbedtls
 bibledit-cloud: hardening-no-fortify-functions
 bibledit-cloud: spelling-error-in-binary usr/bin/bibledit-cloud ment meant
 bibledit-cloud: hardening-no-bindnow usr/bin/bibledit-cloud
+
+# The package supplies a service file for systemd.
+# The debian builder creates an init.d script out of that.
+# So this script is generated, and not in the source package.
+bibledit-cloud: init.d-script-not-included-in-package etc/init.d/bibledit-cloud
+bibledit-cloud: init.d-script-not-marked-as-conffile etc/init.d/bibledit-cloud
