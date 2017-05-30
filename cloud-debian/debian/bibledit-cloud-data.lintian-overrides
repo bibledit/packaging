@@ -3,12 +3,6 @@
 # $ lintian --pedantic --no-tag-display-limit bibledit*changes bibledit*deb bibledit*dsc | ./lintian-utils/bin/lintian-overrider
 # git clone git://anonscm.debian.org/users/nthykier/lintian-utils.git
 
-# Lintian issues an eror about a missing "make".
-# It finds "make" called in file debian/rules.
-# However Bibledit does not use this interpreter directly.
-# Therefore it can be overridden.
-bibledit-cloud-data: missing-dep-for-interpreter make => make | build-essential | dpkg-dev (usr/share/bibledit-cloud/debian/rules)
-
 # Override pedantic lintian messages.
 bibledit-cloud-data: font-in-non-font-package
 bibledit-cloud-data: package-contains-empty-directory

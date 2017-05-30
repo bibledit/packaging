@@ -1,6 +1,7 @@
 [Unit]
 Description=Bibledit Cloud
 After=network.target
+Documentation=http://bibledit.org
 
 [Service]
 Type=simple
