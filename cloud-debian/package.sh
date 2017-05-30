@@ -216,21 +216,20 @@ echo Change directory back to $DEBIANSOURCE
 cd $DEBIANSOURCE
 
 
-echo Copying Bibledit repository at alioth from macOS to sid. Todo use a new repository.
-rsync --archive -v --delete ../../alioth/bibledit-gtk $DEBIANSID:.
+echo Copying Bibledit Cloud repository at alioth from macOS to sid. Todo use a new repository.
+rsync --archive -v --delete ../../alioth/debian-alioth-bibledit-cloud $DEBIANSID:.
 if [ $? -ne 0 ]; then exit; fi
 
 
 echo Remove untracked files from the working tree.
-ssh -tt $DEBIANSID "cd bibledit-gtk; git clean -f"
+ssh -tt $DEBIANSID "cd debian-alioth-bibledit-cloud; git clean -f"
 if [ $? -ne 0 ]; then exit; fi
 
 
 echo Import upstream tarball and use pristine-tar.
-ssh -tt $DEBIANSID "cd bibledit-gtk; gbp import-dsc --create-missing-branches --pristine-tar ../bibledit-cloud_*.dsc"
+ssh -tt $DEBIANSID "cd debian-alioth-bibledit-cloud; gbp import-dsc --create-missing-branches --pristine-tar ../bibledit-cloud_*.dsc"
 if [ $? -ne 0 ]; then exit; fi
 
 
-# Todo echo Run ./mentors.sh to build and upload source package to mentors.
-# Todo echo Run ./alioth.sh to push the changes to the debian repository at Alioth.
+echo Run ./alioth.sh to push the changes to the debian repository at Alioth.
 say Ready
