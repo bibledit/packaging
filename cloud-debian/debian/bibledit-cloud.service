@@ -1,0 +1,13 @@
+[Unit]
+Description=Bibledit Cloud
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/bibledit-cloud
+Restart=always
+User=bibledit
+Group=bibledit
+
+[Install]
+WantedBy=multi-user.target

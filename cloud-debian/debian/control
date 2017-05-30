@@ -7,7 +7,7 @@ Uploaders: Jonathan Marsden <jmarsden@fastmail.fm>,
  Dmitrijs Ledkovs <dmitrij.ledkov@ubuntu.com>,
  Teus Benschop <teusjannette@gmail.com>,
  Roberto C. Sánchez <roberto@debian.org>
-Build-Depends: debhelper (>= 9), autotools-dev, patchutils (>= 0.2.25), pkg-config, libgtk-3-dev, rcs, dh-autoreconf, libwebkit2gtk-4.0-dev, autoconf, autoconf-archive, libcurl4-openssl-dev, libssl-dev, libatspi2.0-dev, zip, unzip, libmbedtls-dev, libmimetic-dev
+Build-Depends: debhelper (>= 9), autotools-dev, patchutils (>= 0.2.25), pkg-config, libgtk-3-dev, rcs, dh-autoreconf, libwebkit2gtk-4.0-dev, autoconf, autoconf-archive, libcurl4-openssl-dev, libssl-dev, libatspi2.0-dev, zip, unzip, libmbedtls-dev, libmimetic-dev, dh-systemd
 Standards-Version: 3.9.8
 Homepage: http://bibledit.org
 Vcs-Git: git://anonscm.debian.org/pkg-crosswire/bibledit-cloud.git
@@ -15,7 +15,7 @@ Vcs-Browser: https://anonscm.debian.org/cgit/pkg-crosswire/bibledit-cloud.git/
 
 Package: bibledit-cloud
 Architecture: any
-Depends: bibledit-cloud-data, ${shlibs:Depends}, ${misc:Depends}, fonts-sil-ezra
+Depends: bibledit-cloud-data, ${shlibs:Depends}, ${misc:Depends}, fonts-sil-ezra, adduser
 Description: Bible editor server
  An online tool for the Bible translator.
  Translate Bibles.
