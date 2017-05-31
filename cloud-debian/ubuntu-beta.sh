@@ -36,8 +36,6 @@ export LC_ALL="C"
 
 
 cd $LAUNCHPADUBUNTU
-sed -i.bak 's/libmbedtls-dev//g' debian/control
-rm debian/control.bak
 find . -name .DS_Store -delete
 bzr add .
 bzr commit -m "new upstream version"
