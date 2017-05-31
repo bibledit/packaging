@@ -27,6 +27,7 @@ if [ $? -ne 0 ]; then exit; fi
 
 
 echo Synchronizing debian repository from sid to macOS.
+rm -rf /tmp/debian-alioth-bibledit-cloud
 cp -r ../../alioth/debian-alioth-bibledit-cloud /tmp
 rm -rf ../../alioth/debian-alioth-bibledit-cloud
 rsync --archive -v $DEBIANSID:debian-alioth-bibledit-cloud ../../alioth
