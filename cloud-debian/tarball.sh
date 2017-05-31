@@ -17,15 +17,6 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 
-source ~/scr/sid-ip
-echo The IP address of the Debian machine is $DEBIANSID.
-
-
-echo Check that the Debian machine is alive.
-ping -c 1 $DEBIANSID
-if [ $? -ne 0 ]; then exit; fi
-
-
 DEBIANSOURCE=`dirname $0`
 cd $DEBIANSOURCE
 DEBIANSOURCE=`pwd`

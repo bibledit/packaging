@@ -40,3 +40,6 @@ find . -name .DS_Store -delete
 bzr add .
 bzr commit -m "new upstream version"
 bzr push
+
+# In .bzr/branch/branch.conf, set:
+# add.maximum_file_size = 100MB
