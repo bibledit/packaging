@@ -1,7 +1,7 @@
-bibledit-cloud (5.0.197-1) unstable; urgency=low
+bibledit-cloud (5.0.198-1) unstable; urgency=low
 
   * Initial release
   * Complete ITP, closes: #863408
 
- -- Teus Benschop <teusjannette@gmail.com>  Tue, 23 May 2017 10:40:00 +0200
+ -- Teus Benschop <teusjannette@gmail.com>  Wed, 31 May 2017 11:01:57 +0200
 
