@@ -79,11 +79,7 @@ ssh -tt $DEBIANSID "cd bibledit*[0-9]; sbuild"
 if [ $? -ne 0 ]; then exit; fi
 
 
-echo Change directory back to $DEBIANSOURCE
-cd $DEBIANSOURCE
-
-
-echo Copying Bibledit Cloud repository at alioth from macOS to sid. Todo use a new repository.
+echo Copying Bibledit Cloud repository at alioth from macOS to sid.
 rsync --archive -v --delete ../../alioth/debian-alioth-bibledit-cloud $DEBIANSID:.
 if [ $? -ne 0 ]; then exit; fi
 

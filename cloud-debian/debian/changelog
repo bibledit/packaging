@@ -1,10 +1,4 @@
-bibledit-cloud (5.0.199-1) unstable; urgency=low
-
-  * new upstream version
-
- -- Teus Benschop <teusjannette@gmail.com>  Wed, 31 May 2017 17:39:37 +0200
-
-bibledit-cloud (5.0.198-1) unstable; urgency=low
+bibledit-cloud (5.0.200-1) unstable; urgency=low
 
   * Initial release
   * Complete ITP, closes: #863408

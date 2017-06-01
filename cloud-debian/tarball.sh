@@ -96,6 +96,15 @@ rm Makefile.am.bak
 if [ $? -ne 0 ]; then exit; fi
 
 
+echo Remove client man file.
+rm man/bibledit.1
+if [ $? -ne 0 ]; then exit; fi
+sed -i.bak 's/man\/bibledit\.1 //g' Makefile.am
+if [ $? -ne 0 ]; then exit; fi
+rm Makefile.am.bak
+if [ $? -ne 0 ]; then exit; fi
+
+
 echo Remove some files from the core library
 # It does not use the "bibledit" shell script.
 # That script writes to the crontab.
@@ -129,10 +138,6 @@ echo Remove extra font files.
 # Fix for the lintian warning "duplicate-font-file".
 rm fonts/SILEOT.ttf
 if [ $? -ne 0 ]; then exit; fi
-
-
-echo Remove client man file.
-rm man/bibledit.1
 
 
 echo Configure and clean the source.
