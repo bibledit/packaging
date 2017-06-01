@@ -18,18 +18,15 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 
-echo Updates the repository that creates Ubuntu beta packages.
+echo This assumes a Debian tarball on the Desktop.
+echo Update the repository that creates Ubuntu beta packages.
 
 
-./tarball.sh
-TMPLINUX=/tmp/bibledit-linux
-
-
-LAUNCHPADUBUNTU=../launchpad/ubuntu-beta
+LAUNCHPADUBUNTU=../../launchpad/ubuntu-beta
 rm -rf $LAUNCHPADUBUNTU/*
 
 
-tar --strip-components=1 -C $LAUNCHPADUBUNTU -xzf $TMPLINUX/bibledit*tar.gz
+tar --strip-components=1 -C $LAUNCHPADUBUNTU -xzf ~/Desktop/bibledit*tar.gz
 
 
 export LANG="C"
@@ -37,8 +34,6 @@ export LC_ALL="C"
 
 
 cd $LAUNCHPADUBUNTU
-sed -i.bak 's/libmbedtls-dev//g' debian/control
-rm debian/control.bak
 find . -name .DS_Store -delete
 bzr add .
 bzr commit -m "new upstream version"

@@ -18,25 +18,21 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 
-echo Updates the repositories that create Ubuntu packages.
+echo This assumes a Debian tarball on the Desktop.
+echo Update the repositories that create Ubuntu packages.
 
 
 # Bibledit support status:
 # Precise 12.04: No support: package libwebkit2gtk-3.0-dev and libwebkit2gtk-4.0-dev not available.
 
 
-./tarball.sh
-TMPLINUX=/tmp/bibledit-linux
-echo Works with the tarball supposed to be there in $TMPLINUX.
-
-
-LAUNCHPADUBUNTU=../launchpad/ubuntu
+LAUNCHPADUBUNTU=../../launchpad/ubuntu
 echo Clean repository at $LAUNCHPADUBUNTU.
 rm -rf $LAUNCHPADUBUNTU/*
 
 
 echo Unpack tarball into the repository.
-tar --strip-components=1 -C $LAUNCHPADUBUNTU -xzf $TMPLINUX/bibledit*tar.gz
+tar --strip-components=1 -C $LAUNCHPADUBUNTU -xzf ~/Desktop/bibledit*tar.gz
 
 
 export LANG="C"
@@ -45,9 +41,6 @@ export LC_ALL="C"
 
 echo Change directory to repository.
 pushd $LAUNCHPADUBUNTU
-echo Update dependencies: Use embedded mbedtls.
-sed -i.bak 's/libmbedtls-dev//g' debian/control
-rm debian/control.bak
 echo Remove clutter.
 find . -name .DS_Store -delete
 echo Commit to Launchpad.
@@ -58,7 +51,7 @@ echo Change directory back to origin.
 popd
 
 
-LAUNCHPADTRUSTY=../launchpad/trusty
+LAUNCHPADTRUSTY=../../launchpad/trusty
 echo Clean repository at $LAUNCHPADTRUSTY.
 rm -rf $LAUNCHPADTRUSTY/*
 
@@ -78,3 +71,4 @@ bzr commit -m "new upstream version"
 bzr push
 echo Change directory back to origin.
 popd
+    
