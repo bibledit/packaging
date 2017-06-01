@@ -98,6 +98,8 @@ xattr -r -c *
 echo Configure and clean the source.
 ./configure
 if [ $? -ne 0 ]; then exit; fi
+pkgdata/create.sh
+if [ $? -ne 0 ]; then exit; fi
 make distclean
 if [ $? -ne 0 ]; then exit; fi
 
