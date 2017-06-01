@@ -39,7 +39,7 @@ echo Create a tarball
 echo Clean the Debian builder and copy the tarball to it.
 ssh $DEBIANSID "rm -rf bibledit*"
 if [ $? -ne 0 ]; then exit; fi
-scp $TMPDEBIAN/*.gz $DEBIANSID:.
+scp ~/Desktop/*.gz $DEBIANSID:.
 if [ $? -ne 0 ]; then exit; fi
 
 
