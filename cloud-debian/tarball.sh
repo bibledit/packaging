@@ -131,6 +131,10 @@ rm fonts/SILEOT.ttf
 if [ $? -ne 0 ]; then exit; fi
 
 
+echo Remove client man file.
+rm man/bibledit.1
+
+
 echo Configure and clean the source.
 ./configure
 if [ $? -ne 0 ]; then exit; fi
