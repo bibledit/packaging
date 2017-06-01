@@ -115,5 +115,3 @@ echo Copy the Debian tarball to the Desktop.
 rm -f ~/Desktop/bibledit*gz
 scp $TMPDEBIAN/*.gz ~/Desktop
 if [ $? -ne 0 ]; then exit; fi
-
-
