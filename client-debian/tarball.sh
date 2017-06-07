@@ -65,6 +65,17 @@ cp -r $DEBIANSOURCE/debian .
 # they should be updated with something useful, or else be removed.
 
 
+echo Disable mach.h definitions.
+# On Debian hurd-i386 it has the header mach/mach.h.
+# But it does not have the 64 bits statistics definitions.
+# It fails to compile there.
+# So disable them.
+sed -i.bak '/HAVE_MACH_MACH/d' configure.ac
+if [ $? -ne 0 ]; then exit; fi
+rm configure.ac.bak
+if [ $? -ne 0 ]; then exit; fi
+
+
 echo Reconfiguring the source.
 ./reconfigure
 if [ $? -ne 0 ]; then exit; fi
