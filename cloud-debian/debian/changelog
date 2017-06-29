@@ -1,8 +1,9 @@
-bibledit-cloud (5.0.206-1) unstable; urgency=low
+bibledit-cloud (5.0.228-1) unstable; urgency=low
 
   * new upstream version
+  * debian/copyright: updated copyright notices
 
- -- Teus Benschop <teusjannette@gmail.com>  Wed, 07 Jun 2017 21:04:32 +0200
+ -- Teus Benschop <teusjannette@gmail.com>  Thu, 29 Jun 2017 12:57:28 +0200
 
 bibledit-cloud (5.0.200-1) unstable; urgency=low
 
