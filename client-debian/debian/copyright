@@ -38,7 +38,7 @@ Copyright: 2010, Hong Jiang
 License: Expat
 
 Files: sqlite/*
-Copyright: 2000-2017 D. Richard Hipp
+Copyright: 2000-2017 D. Richard Hipp.
 License: CC0
 
 Files: notifit/*
@@ -81,9 +81,18 @@ Files: nicedit/*
 Copyright: 2007-2008, Brian Kirchoff
 License: Expat
 
+Files: miniz/*
+Copyright: 2010-2014, Rich Geldreich and Tenacious Software LLC
+  2013-2014, RAD Game Tools and Valve Software
+License: Expat
+
 Files: filter/UriCodec.cpp
 Copyright: 2006, Jin Qing
 License: GPL-3.0+
+
+Files: microtar/*
+Copyright: 2017, rxi
+License: Expat
 
 License: GPL-3.0+
  This program is free software; you can redistribute it and/or modify
