@@ -18,7 +18,14 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 
-echo This assumes a Debian tarball on the Desktop.
+echo Create a tarball for the Linux Client.
+../../linux/tarball.sh
+if [ $? -ne 0 ]; then exit; fi
+echo Create a tarball for Debian
+./tarball.sh
+if [ $? -ne 0 ]; then exit; fi
+
+
 echo Update the repository that creates Ubuntu beta packages.
 
 

@@ -31,13 +31,13 @@ if [ $? -ne 0 ]; then exit; fi
 
 
 echo Build the Debian source package.
-ssh -tt $DEBIANSID "cd bibledit*[0-9]; debuild -S -sa"
-if [ $? -ne 0 ]; then exit; fi
+# ssh -tt $DEBIANSID "cd bibledit*[0-9]; debuild -S -sa"
+# if [ $? -ne 0 ]; then exit; fi
 
 
 echo Upload the Debian source package.
-ssh -tt $DEBIANSID "dput mentors *source.changes"
-if [ $? -ne 0 ]; then exit; fi
+# ssh -tt $DEBIANSID "dput mentors *source.changes"
+# if [ $? -ne 0 ]; then exit; fi
 
 
 echo Sign the watched archive:
