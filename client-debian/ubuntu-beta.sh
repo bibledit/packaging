@@ -29,7 +29,7 @@ if [ $? -ne 0 ]; then exit; fi
 echo Update the repository that creates Ubuntu beta packages.
 
 
-LAUNCHPADUBUNTU=../../launchpad/ubuntu-beta
+LAUNCHPADUBUNTU=../../launchpad/ubuntu-client-beta
 rm -rf $LAUNCHPADUBUNTU/*
 
 
@@ -42,6 +42,8 @@ export LC_ALL="C"
 
 cd $LAUNCHPADUBUNTU
 find . -name .DS_Store -delete
+sed -i '' '/maximum_file_size/d' .bzr/branch/branch.conf
+echo add.maximum_file_size = 100MB >> .bzr/branch/branch.conf
 bzr add .
 bzr commit -m "new upstream version"
 bzr push

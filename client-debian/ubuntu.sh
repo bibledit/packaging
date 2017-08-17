@@ -51,6 +51,8 @@ pushd $LAUNCHPADUBUNTU
 echo Remove clutter.
 find . -name .DS_Store -delete
 echo Commit to Launchpad.
+sed -i '' '/maximum_file_size/d' .bzr/branch/branch.conf
+echo add.maximum_file_size = 100MB >> .bzr/branch/branch.conf
 bzr add .
 bzr commit -m "new upstream version"
 bzr push
@@ -72,7 +74,11 @@ pushd $LAUNCHPADTRUSTY
 echo Update dependencies: Trusty has libwebkit2gtk-3.0-dev.
 sed -i.bak 's/libwebkit2gtk-4.0-dev/libwebkit2gtk-3.0-dev/g' debian/control
 rm debian/control.bak
+echo Remove clutter.
+find . -name .DS_Store -delete
 echo Commit to Launchpad.
+sed -i '' '/maximum_file_size/d' .bzr/branch/branch.conf
+echo add.maximum_file_size = 100MB >> .bzr/branch/branch.conf
 bzr add .
 bzr commit -m "new upstream version"
 bzr push
