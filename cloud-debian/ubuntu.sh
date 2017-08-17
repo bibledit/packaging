@@ -36,10 +36,13 @@ export LC_ALL="C"
 
 
 cd $LAUNCHPADUBUNTU
+# Remove clutter.
 find . -name .DS_Store -delete
+# Ensure that large files get added to the repository.
+# For example, sample.sqlite is large, and is needed.
+sed -i '' '/maximum_file_size/d' .bzr/branch/branch.conf
+echo add.maximum_file_size = 100MB >> .bzr/branch/branch.conf
 bzr add .
 bzr commit -m "new upstream version"
 bzr push
 
-# In .bzr/branch/branch.conf, set:
-# add.maximum_file_size = 100MB
