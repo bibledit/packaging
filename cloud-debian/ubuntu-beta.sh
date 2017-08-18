@@ -24,7 +24,7 @@ echo Updates the repository that creates Ubuntu beta packages.
 ./tarball.sh
 
 
-LAUNCHPADUBUNTU=../../launchpad/ubuntu-beta-cloud
+LAUNCHPADUBUNTU=../../launchpad/ubuntu-cloud-beta
 rm -rf $LAUNCHPADUBUNTU/*
 
 
