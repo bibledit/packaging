@@ -1,17 +1,15 @@
-bibledit (5.0.268-1) experimental; urgency=low
-
-  * new upstream version
-
- -- Teus Benschop <teusjannette@gmail.com>  Tue, 15 Aug 2017 12:27:01 +0200
-
-bibledit (5.0.240-1) experimental; urgency=low
+bibledit (5.0.329-1) unstable; urgency=low
 
   * new upstream version
   * debian/copyright: updated copyright notices
   * debian/control: updated Build-Depends
   * debian/control: no longer replaces bibledit-gtk(-data)
+  * debian/control: updated Standards-Version
+  * debian/bibledit.lintian-overrides: override some lintian warnings
+  * debian/changelog: upload to unstable
+  * debian/control: updated Priority
 
- -- Teus Benschop <teusjannette@gmail.com>  Fri, 21 Jul 2017 11:55:30 +0200
+ -- Teus Benschop <teusjannette@gmail.com>  Mon, 23 Oct 2017 14:09:55 +0200
 
 bibledit (5.0.145-1) experimental; urgency=low
 
