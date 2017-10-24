@@ -13,7 +13,6 @@ bibledit: embedded-library usr/bin/bibledit: mbedtls
 
 # Override pedantic lintian messages.
 bibledit: hardening-no-fortify-functions
-bibledit: spelling-error-in-binary usr/bin/bibledit ment meant
 bibledit: hardening-no-bindnow usr/bin/bibledit
 
 # Override lintian warning about missing upstream signature.
@@ -21,5 +20,4 @@ bibledit: hardening-no-bindnow usr/bin/bibledit
 # The script to build Bibledit packages for Debian does not use an upstream tarball.
 # It creates a tarball from the upstream git repository instead.
 bibledit: orig-tarball-missing-upstream-signature
-
 

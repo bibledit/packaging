@@ -8,6 +8,7 @@ bibledit (5.0.329-1) unstable; urgency=low
   * debian/bibledit.lintian-overrides: override some lintian warnings
   * debian/changelog: upload to unstable
   * debian/control: updated Priority
+  * debian/upstream/signing-key.asc: removed as not relevant
 
  -- Teus Benschop <teusjannette@gmail.com>  Mon, 23 Oct 2017 14:09:55 +0200
 
