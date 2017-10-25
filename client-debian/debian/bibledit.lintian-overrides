@@ -19,5 +19,5 @@ bibledit: hardening-no-bindnow usr/bin/bibledit
 # The reason the signature is missing is this:
 # The script to build Bibledit packages for Debian does not use an upstream tarball.
 # It creates a tarball from the upstream git repository instead.
-bibledit: orig-tarball-missing-upstream-signature
-
+# This is the warning: bibledit: orig-tarball-missing-upstream-signature
+# N: Cannot override changes tags (bug #575400)...
