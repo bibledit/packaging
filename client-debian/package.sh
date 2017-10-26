@@ -60,6 +60,18 @@ ssh $DEBIANSID "rename 's/tar/orig.tar/g' bibledit*gz"
 if [ $? -ne 0 ]; then exit; fi
 
 
+echo Sign the source tarball.
+ssh $DEBIANSID "gpg2 --armor --detach-sign --batch --yes bibledit*.gz"
+if [ $? -ne 0 ]; then exit; fi
+
+
+echo Upload the source tarball
+scp $DEBIANSID:bibledit*gz* ~/dev/website/bibledit.org/linux/debian
+if [ $? -ne 0 ]; then exit; fi
+~/scr/upload
+if [ $? -ne 0 ]; then exit; fi
+
+
 echo Unpack the tarball in Debian.
 ssh $DEBIANSID "tar xf bibledit*gz"
 if [ $? -ne 0 ]; then exit; fi
@@ -67,6 +79,11 @@ if [ $? -ne 0 ]; then exit; fi
 
 echo Do a license check.
 ssh -tt $DEBIANSID "cd bibledit*[0-9]; licensecheck --recursive --ignore debian --deb-machine *"
+if [ $? -ne 0 ]; then exit; fi
+
+
+echo Do a source scan.
+ssh -tt $DEBIANSID "cd bibledit*[0-9]; uscan"
 if [ $? -ne 0 ]; then exit; fi
 
 
