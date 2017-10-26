@@ -61,7 +61,13 @@ if [ $? -ne 0 ]; then exit; fi
 
 
 echo Sign the source tarball.
-ssh $DEBIANSID "gpg2 --armor --detach-sign --batch --yes bibledit*.gz"
+rm -f ~/Desktop/bibledit*gz
+if [ $? -ne 0 ]; then exit; fi
+scp $DEBIANSID:bibledit*gz* ~/Desktop
+if [ $? -ne 0 ]; then exit; fi
+gpg2 --armor --detach-sign --batch --yes ~/Desktop/bibledit*.gz
+if [ $? -ne 0 ]; then exit; fi
+scp ~/Desktop/bibledit*.gz.asc $DEBIANSID:.
 if [ $? -ne 0 ]; then exit; fi
 
 
