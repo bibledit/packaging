@@ -35,3 +35,4 @@ if [ $? -ne 0 ]; then exit; fi
 
 
 echo Run $ git push --all and $ git push --tags to update the remote repository.
+echo Sign tarball: $ gpg2 --detach-sign --armor bibledit-*.tar.gz
