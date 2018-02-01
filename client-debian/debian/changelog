@@ -1,9 +1,10 @@
-bibledit (5.0.413-1) unstable; urgency=low
+bibledit (5.0.427-1) unstable; urgency=low
 
-  * new upstream version
+  * new upstream version: Closes: #884023
+  * debian/postrm: better package purge
   * debian/postrm: better package purge
 
- -- Teus Benschop <teusjannette@gmail.com>  Tue, 16 Jan 2018 13:16:32 +0100
+ -- Teus Benschop <teusjannette@gmail.com>  Wed, 31 Jan 2018 13:57:33 +0100
 
 bibledit (5.0.331-1) unstable; urgency=low
 
