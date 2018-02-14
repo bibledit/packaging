@@ -46,6 +46,18 @@ echo Create a tarball for Debian
 if [ $? -ne 0 ]; then exit; fi
 
 
+echo Sign the source tarball.
+gpg2 --armor --detach-sign --batch --yes ~/Desktop/bibledit*.gz
+if [ $? -ne 0 ]; then exit; fi
+
+
+echo Upload the source tarball
+cp ~/Desktop/bibledit*.gz* ~/dev/website/bibledit.org/linux/debian
+if [ $? -ne 0 ]; then exit; fi
+~/scr/upload
+if [ $? -ne 0 ]; then exit; fi
+
+
 echo Clean the Debian builder and copy the tarball to it.
 ssh $DEBIANSID "rm -rf bibledit*"
 if [ $? -ne 0 ]; then exit; fi
@@ -60,22 +72,15 @@ ssh $DEBIANSID "rename 's/tar/orig.tar/g' bibledit*gz"
 if [ $? -ne 0 ]; then exit; fi
 
 
-echo Sign the source tarball.
-rm -f ~/Desktop/bibledit*gz
-if [ $? -ne 0 ]; then exit; fi
-scp $DEBIANSID:bibledit*gz* ~/Desktop
-if [ $? -ne 0 ]; then exit; fi
-gpg2 --armor --detach-sign --batch --yes ~/Desktop/bibledit*.gz
-if [ $? -ne 0 ]; then exit; fi
-scp ~/Desktop/bibledit*.gz.asc $DEBIANSID:.
-if [ $? -ne 0 ]; then exit; fi
-
-
-echo Upload the source tarball
-scp $DEBIANSID:bibledit*gz* ~/dev/website/bibledit.org/linux/debian
-if [ $? -ne 0 ]; then exit; fi
-~/scr/upload
-if [ $? -ne 0 ]; then exit; fi
+# echo Sign the source tarball.
+# rm -f ~/Desktop/bibledit*gz
+# if [ $? -ne 0 ]; then exit; fi
+# scp $DEBIANSID:bibledit*gz* ~/Desktop
+# if [ $? -ne 0 ]; then exit; fi
+# gpg2 --armor --detach-sign --batch --yes ~/Desktop/bibledit*.gz
+# if [ $? -ne 0 ]; then exit; fi
+# scp ~/Desktop/bibledit*.gz.asc $DEBIANSID:.
+# if [ $? -ne 0 ]; then exit; fi
 
 
 echo Unpack the tarball in Debian.
