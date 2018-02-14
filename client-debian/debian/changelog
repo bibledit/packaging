@@ -3,6 +3,7 @@ bibledit (5.0.441-1) unstable; urgency=low
   * new upstream version
   * debian/postrm: better package purge
   * debian/postrm: better package purge
+  * debian/bibledit.lintian-overrides: remove some comments
 
  -- Teus Benschop <teusjannette@gmail.com>  Wed, 14 Feb 2018 12:26:37 +0100
 
