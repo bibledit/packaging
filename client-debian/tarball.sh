@@ -50,15 +50,15 @@ echo Copy the Debian packaging source to $TMPDEBIAN
 cp -r $DEBIANSOURCE/debian .
 
 
-echo Link with the system-provided mbed TLS library.
+# echo Link with the system-provided mbed TLS library.
 # Fix for lintian error "embedded-library usr/bin/bibledit: mbedtls":
 # * Remove mbedtls from the list of sources to compile.
 # * Add -lmbedtls and friends to the linker flags.
-sed -i.bak '/mbedtls\//d' Makefile.am
-if [ $? -ne 0 ]; then exit; fi
-sed -i.bak 's/# debian//g' Makefile.am
-if [ $? -ne 0 ]; then exit; fi
-rm *.bak
+# sed -i.bak '/mbedtls\//d' Makefile.am
+# if [ $? -ne 0 ]; then exit; fi
+# sed -i.bak 's/# debian//g' Makefile.am
+# if [ $? -ne 0 ]; then exit; fi
+# rm *.bak
 
 
 # If the debian/README* or README.Debian files contain no useful content,
