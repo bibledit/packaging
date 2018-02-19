@@ -112,24 +112,4 @@ ssh -tt $DEBIANSID "cd bibledit*[0-9]; sbuild -d experimental -c unstable-amd64-
 if [ $? -ne 0 ]; then exit; fi
 
 
-echo Change directory back to $DEBIANSOURCE
-cd $DEBIANSOURCE
-
-
-echo Copying Bibledit repository at alioth from macOS to sid.
-rsync --archive -v --delete ../../alioth/bibledit-gtk $DEBIANSID:.
-if [ $? -ne 0 ]; then exit; fi
-
-
-echo Remove untracked files from the working tree.
-ssh -tt $DEBIANSID "cd bibledit-gtk; git clean -f"
-if [ $? -ne 0 ]; then exit; fi
-
-
-echo Import upstream tarball and use pristine-tar.
-# The team now signs the tags.
-ssh -tt $DEBIANSID "cd bibledit-gtk; gbp import-dsc --create-missing-branches --pristine-tar --git-sign-tags ../bibledit_*.dsc"
-if [ $? -ne 0 ]; then exit; fi
-
-
-echo Run ./alioth.sh to push the changes to the debian repository at Alioth.
+echo Run ./git.sh to update the shared git repository.

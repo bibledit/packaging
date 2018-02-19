@@ -9,12 +9,16 @@
 /* Begin PBXFileReference section */
 		CA27F3A41ED3682A003F4813 /* client-debian */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "client-debian"; sourceTree = "<group>"; };
 		CA89F8421ED595E30018A205 /* cloud-debian */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "cloud-debian"; sourceTree = "<group>"; };
+		CAD637F6203AED6A00CA7577 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		CAD637F7203AED7100CA7577 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
 		CA6867431B03997100DB9422 = {
 			isa = PBXGroup;
 			children = (
+				CAD637F6203AED6A00CA7577 /* LICENSE */,
+				CAD637F7203AED7100CA7577 /* README.md */,
 				CA27F3A41ED3682A003F4813 /* client-debian */,
 				CA89F8421ED595E30018A205 /* cloud-debian */,
 			);
