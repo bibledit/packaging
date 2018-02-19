@@ -127,7 +127,8 @@ if [ $? -ne 0 ]; then exit; fi
 
 
 echo Import upstream tarball and use pristine-tar.
-ssh -tt $DEBIANSID "cd bibledit-gtk; gbp import-dsc --create-missing-branches --pristine-tar ../bibledit_*.dsc"
+# The team now signs the tags.
+ssh -tt $DEBIANSID "cd bibledit-gtk; gbp import-dsc --create-missing-branches --pristine-tar --git-sign-tags ../bibledit_*.dsc"
 if [ $? -ne 0 ]; then exit; fi
 
 
