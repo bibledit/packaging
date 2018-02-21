@@ -20,7 +20,16 @@
 DEBIANSOURCE=`dirname $0`
 cd $DEBIANSOURCE
 DEBIANSOURCE=`pwd`
-echo Using Debian packaging source at $DEBIANSOURCE.
+echo Running script from $DEBIANSOURCE.
+
+
+source ~/scr/sid-ip
+echo The IP address of the Debian machine is $DEBIANSID.
+
+
+echo Check that the Debian machine is alive.
+ping -c 1 $DEBIANSID
+if [ $? -ne 0 ]; then exit; fi
 
 
 echo Create a tarball for the Linux Client
@@ -51,8 +60,13 @@ cd bibledit*
 if [ $? -ne 0 ]; then exit; fi
 
 
-echo Copy the Debian packaging source to $TMPDEBIAN
-cp -r $DEBIANSOURCE/debian .
+# echo Copy the Debian packaging source to $TMPDEBIAN
+# cp -r $DEBIANSOURCE/debian .
+# It used to copy the debian folder into the tarball.
+# But no longer does that.
+# Reason:
+# The Debian packaging source is stored in the git repository at alioth.
+# It uses this instead.
 
 
 echo Link with the system-provided mbed TLS library.
@@ -137,4 +151,9 @@ if [ $? -ne 0 ]; then exit; fi
 echo Copy the Debian tarball to the Desktop.
 rm -f ~/Desktop/bibledit*gz
 scp $TMPDEBIAN/*.gz ~/Desktop
+if [ $? -ne 0 ]; then exit; fi
+
+
+echo Copy the Debian tarball to the Debian builder.
+scp ~/Desktop/*.gz $DEBIANSID:.
 if [ $? -ne 0 ]; then exit; fi
