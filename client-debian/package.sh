@@ -38,9 +38,6 @@ DEBIANSOURCE=`pwd`
 echo Using Debian packaging source at $DEBIANSOURCE.
 
 
-echo Create a tarball for the Linux Client.
-../../linux/tarball.sh
-if [ $? -ne 0 ]; then exit; fi
 echo Create a tarball for Debian
 ./tarball.sh
 if [ $? -ne 0 ]; then exit; fi
