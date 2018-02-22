@@ -137,7 +137,7 @@ echo Configure and clean the source.
 if [ $? -ne 0 ]; then exit; fi
 pkgdata/create.sh
 if [ $? -ne 0 ]; then exit; fi
-make distclean
+make distclean --jobs=10
 if [ $? -ne 0 ]; then exit; fi
 
 

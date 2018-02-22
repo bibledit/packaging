@@ -50,10 +50,3 @@ if [ $? -ne 0 ]; then exit; fi
 echo Remove untracked files from the working tree
 ssh -tt $DEBIANSID "cd bibledit-gtk; git clean -f"
 if [ $? -ne 0 ]; then exit; fi
-
-
-echo Import upstream tarball and use pristine-tar and sign tags
-echo See: https://honk.sigxcpu.org/projects/git-buildpackage/manual-html/gbp.import.new.upstream.html
-echo cd bibledit-gtk
-echo gbp import-orig --pristine-tar --sign-tags ../bibledit-*.tar.gz
-

@@ -3,9 +3,9 @@ Scripts to partly automate repating tasks.
 ./tarball.sh
 This creates a tarball suitable for Debian.
 
-./git1.sh
-This prepares the repository for packaging.
+./gitmac2sid.sh
+This prepares the repository on macOS for packaging on Debian sid.
 
-./git2.sh
-This prepares the repository for pushing.
+./gitsid2mac.sh
+This copies the updated repository from Debian sid to macOS.
 
