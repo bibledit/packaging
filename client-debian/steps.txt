@@ -46,28 +46,27 @@ More information: https://harryrschwartz.com/2014/11/01/automatically-signing-yo
 
 
 Update the debian/changelog to the correct version.
-$ gbp dch --git-author
+$ gbp dch --git-author --release
 
 
 
 Build the package:
-$ gbp buildpackage
+$ gbp buildpackage --git-export-dir=/tmp/
 When having uncommitted changes in the branch:
-$ gbp buildpackage --git-ignore-new
+$ gbp buildpackage --git-ignore-new --git-export-dir=/tmp/
 
 
+Test the package:
 
 
+Package is OK:
+- Sign the tag
+- Build sources only: -S
+$ gbp buildpackage -S --git-tag --git-sign --git-export-dir=/tmp/
 
 
-
-
-
-
-
-
-
-
+Upload the package:
+$ dupload --to anonymous-ftp-master bibledit*.changes
 
 
 $ ./gitsid2mac.sh
