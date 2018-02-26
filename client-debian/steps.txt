@@ -1,0 +1,74 @@
+Steps to build the Debian package.
+
+
+
+On macOS, create a tarball suitable for Debian.
+$ ./tarball.sh
+
+
+
+Copy the repository from macOS to Debian sid and clean it up.
+$ ./gitmac2sid.sh
+
+
+
+Sign tags and commits.
+The automated tools expect gpg-agent to provide the passphrase.
+To be sure the passphrase is stored, manually sign a file:
+$ gpg --sign <file>
+It will ask for the passphrase, if gpg-agent cannot provide it.
+This will store the passphrase for the automated tools to use.
+
+
+
+Import the upstream tarball and use pristine-tar and sign tags.
+See: https://honk.sigxcpu.org/projects/git-buildpackage/manual-html/gbp.import.new.upstream.html
+$ cd bibledit-gtk
+$ gbp import-orig --pristine-tar --sign-tags ../bibledit-*.tar.gz
+
+
+
+Check that it signed the upstream tag.
+$ git tag | grep upstream
+$ git show <tag>
+
+
+
+Sign the commit manually.
+$ git commit -S --amend
+
+
+
+Check that it signed the last commit.
+$ git log --show-signature -2
+More information: https://harryrschwartz.com/2014/11/01/automatically-signing-your-git-commits.html
+
+
+
+Update the debian/changelog to the correct version.
+$ gbp dch --git-author
+
+
+
+Build the package:
+$ gbp buildpackage
+When having uncommitted changes in the branch:
+$ gbp buildpackage --git-ignore-new
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+$ ./gitsid2mac.sh
+This copies the updated repository from Debian sid back to macOS.
