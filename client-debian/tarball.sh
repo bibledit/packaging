@@ -75,7 +75,7 @@ rm *.bak
 # Also remove the embedded *.h files to be sure building does not reference them.
 # There had been a case that building used the embedded *.h files, leading to segmentation faults.
 # For cleanness, remove the whole mbedtls directory, so all traces of it are gone completely.
-rm -rf mbedtls
+rm -rf mbedtls*
 
 
 # If the debian/README* or README.Debian files contain no useful content,
