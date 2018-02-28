@@ -60,15 +60,6 @@ cd bibledit*
 if [ $? -ne 0 ]; then exit; fi
 
 
-# echo Copy the Debian packaging source to $TMPDEBIAN
-# cp -r $DEBIANSOURCE/debian .
-# It used to copy the debian folder into the tarball.
-# But no longer does that.
-# Reason:
-# The Debian packaging source is stored in the git repository at alioth.
-# It uses this instead.
-
-
 echo Link with the system-provided mbed TLS library.
 # It is important to use the system-provided mbedtls library because it is a security library.
 # This way, Debian updates to libmbedtls become available to Bibledit too.
