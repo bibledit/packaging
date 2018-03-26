@@ -95,12 +95,6 @@ ssh -tt $DEBIANSID "cd bibledit*[0-9]; debuild -us -uc"
 if [ $? -ne 0 ]; then exit; fi
 
 
-echo Do a pedantic lintian check.
-ssh -tt $DEBIANSID "lintian --display-info --pedantic --no-tag-display-limit --info bibledit*changes bibledit*deb bibledit*dsc"
-# No checking of exit code because when lintian finds an error,
-# even if the error is overriddden, it exits with 1.
-
-
 echo Build the Debian package in a chroot.
 # Builds for upload to unstable.
 # ssh -tt $DEBIANSID "cd bibledit*[0-9]; sbuild"

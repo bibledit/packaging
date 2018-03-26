@@ -1,6 +1,9 @@
 Steps to build the Debian package.
 
 
+On Debian, clone the repository.
+$ gbp clone --all git+ssh://joe@scm.alioth.debian.org/git/pkg-crosswire/bibledit-gtk.git
+
 
 On macOS, create a tarball suitable for Debian.
 $ ./tarball.sh
@@ -8,8 +11,7 @@ $ ./tarball.sh
 
 
 Pull all changes.
-$ git pull --all
-$ git pull --tags
+$ gbp pull --all
 
 
 
@@ -39,7 +41,7 @@ $ git show <tag>
 
 
 
-Sign the commit manually.
+Sign the above commit manually.
 $ git commit -S --amend
 
 
@@ -61,22 +63,20 @@ When having uncommitted changes in the branch:
 $ gbp buildpackage --git-ignore-new --git-export-dir=/tmp/
 
 
+Do a pedantic lintian check.
+$ lintian --display-info --pedantic --no-tag-display-limit --info bibledit*changes bibledit*deb bibledit*dsc
+
+
 Test the package.
 
 
-Package is OK:
-- Sign the tag
-- Build sources only: -S
+Package is OK: Sign the tag and build sources only with -S :
 $ gbp buildpackage -S --git-tag --git-sign --git-export-dir=/tmp/
-
 
 
 Upload the package:
 $ dupload --to anonymous-ftp-master bibledit*.changes
 
 
-
 Push the changes to the remote repository.
-$ git push --all
-$ git push --tags
-
+$ gbp push --verbose
