@@ -9,15 +9,12 @@ On macOS, create a tarball suitable for Debian.
 $ ./tarball.sh
 
 
-
 Pull all changes.
 $ gbp pull --all
 
 
-
 Remove untracked files from the working tree
 $ git clean -f
-
 
 
 Sign tags and commits.
@@ -28,11 +25,9 @@ It will ask for the passphrase, if gpg-agent cannot provide it.
 This will store the passphrase for the automated tools to use.
 
 
-
 Import the upstream tarball and use pristine-tar and sign tags.
 See: https://honk.sigxcpu.org/projects/git-buildpackage/manual-html/gbp.import.new.upstream.html
 $ gbp import-orig --pristine-tar --sign-tags ../bibledit-*.tar.gz
-
 
 
 Check that it signed the upstream tag.
@@ -61,6 +56,7 @@ Build the package:
 $ gbp buildpackage --git-export-dir=/tmp/
 When having uncommitted changes in the branch:
 $ gbp buildpackage --git-ignore-new --git-export-dir=/tmp/
+
 
 
 Do a pedantic lintian check.
