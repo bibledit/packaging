@@ -1,6 +1,73 @@
+bibledit (5.0.546-1) unstable; urgency=low
+
+  * new upstream version
+
+ -- Teus Benschop <teusjannette@gmail.com>  Thu, 05 Jul 2018 12:49:31 +0200
+
+bibledit (5.0.538-1) unstable; urgency=low
+
+  * new upstream version
+
+ -- Teus Benschop <teusjannette@gmail.com>  Thu, 05 Jul 2018 12:24:22 +0200
+
+bibledit (5.0.482-4) unstable; urgency=high
+
+  * debian/control: Updated maintainer: Fix confusion in Debian
+
+ -- Teus Benschop <teusjannette@gmail.com>  Tue, 19 Jun 2018 13:08:13 +0200
+
+bibledit (5.0.482-3) unstable; urgency=medium
+
+  * debian/control: Temporal maintainer email, Closes: #899448
+  * debian/control: Temporal Vcs-Git/Browser
+
+ -- Teus Benschop <teusjannette@gmail.com>  Fri, 01 Jun 2018 10:05:29 +0200
+
+bibledit (5.0.482-2) unstable; urgency=medium
+
+  * debian/postrm: deleted: Closes: #892820
+
+ -- Teus Benschop <teusjannette@gmail.com>  Mon, 09 Apr 2018 13:10:03 +0200
+
+bibledit (5.0.482-1) unstable; urgency=medium
+
+  * New upstream version 5.0.482: Closes: #884024
+
+ -- Teus Benschop <teusjannette@gmail.com>  Tue, 03 Apr 2018 12:49:50 +0200
+
+bibledit (5.0.474-1) unstable; urgency=medium
+
+  * debian/control: Multi-Arch: foreign: Closes: #893614
+  * New upstream version 5.0.474
+
+ -- Teus Benschop <teusjannette@gmail.com>  Mon, 26 Mar 2018 14:06:42 +0200
+
+bibledit (5.0.453-3) unstable; urgency=medium
+
+  * debian/rules: added override_dh_install: Closes: #884047
+
+ -- Teus Benschop <teusjannette@gmail.com>  Mon, 19 Mar 2018 14:05:53 +0100
+
+bibledit (5.0.453-2) unstable; urgency=medium
+
+  * debian/watch: upstream does not provide a tarball online
+  * debian/control: Removed Build-Depends: dh-autoreconf
+  * debian/control: Removed Build-Depends: autotools-dev
+  * debian/bibledit.lintian-overrides: remove unused override mbedtls
+
+ -- Teus Benschop <teusjannette@gmail.com>  Tue, 13 Mar 2018 13:55:06 +0100
+
+bibledit (5.0.453-1) unstable; urgency=medium
+
+  * New upstream version 5.0.453, closes: #890289
+  * Upgrade to debhelper 10
+
+ -- Teus Benschop <teusjannette@gmail.com>  Mon, 26 Feb 2018 13:08:21 +0100
+
 bibledit (5.0.446-1) unstable; urgency=low
 
   * new upstream version
+  * debian/postrm: better package purge
   * debian/postrm: better package purge
   * debian/bibledit.lintian-overrides: remove some comments
   * debian/control:
