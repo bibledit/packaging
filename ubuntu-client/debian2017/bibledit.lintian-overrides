@@ -1,0 +1,21 @@
+# The tool "lintian-overrider" makes it trivial
+# to find the way of overriding a lintian message.
+# $ lintian --pedantic --no-tag-display-limit bibledit*changes bibledit*deb bibledit*dsc | ./lintian-utils/bin/lintian-overrider
+# git clone git://anonscm.debian.org/users/nthykier/lintian-utils.git
+
+# For just now the mbed TLS library is included.
+# When using the system-provided libmbedtls, there currently is a segmentation fault.
+# Pending investigation of this fault, temporarily include mbed TLS.
+# Here is the link to the issue: https://github.com/bibledit/bibledit/issues/499
+bibledit: embedded-library usr/bin/bibledit: mbedtls
+
+# Override pedantic lintian messages.
+bibledit: hardening-no-fortify-functions
+bibledit: hardening-no-bindnow usr/bin/bibledit
+
+# Override lintian warning about missing upstream signature.
+# The reason the signature is missing is this:
+# The script to build Bibledit packages for Debian does not use an upstream tarball.
+# It creates a tarball from the upstream git repository instead.
+# This is the warning: bibledit: orig-tarball-missing-upstream-signature
+# N: Cannot override changes tags (bug #575400)...
