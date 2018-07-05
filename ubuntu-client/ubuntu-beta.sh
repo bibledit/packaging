@@ -34,47 +34,66 @@ export LC_ALL="C"
 
 
 cd $SCRIPTFOLDER
+if [ $? -ne 0 ]; then exit; fi
 
 LAUNCHPADUBUNTU=$SCRIPTFOLDER/../../launchpad/client-beta
 LAUNCHPADUBUNTU=`realpath $LAUNCHPADUBUNTU`
+if [ $? -ne 0 ]; then exit; fi
 echo Updating the code for creating Ubuntu beta packages in $LAUNCHPADUBUNTU
 rm -rf $LAUNCHPADUBUNTU/*
 
 echo Unpack tarball into the repository.
 tar --strip-components=1 -C $LAUNCHPADUBUNTU -xzf ~/Desktop/bibledit*tar.gz
+if [ $? -ne 0 ]; then exit; fi
 
 echo Add the debian folder to the repository.
 cp -r debian $LAUNCHPADUBUNTU
+if [ $? -ne 0 ]; then exit; fi
 
 cd $LAUNCHPADUBUNTU
 find . -name .DS_Store -delete
 sed -i '' '/maximum_file_size/d' .bzr/branch/branch.conf
 echo add.maximum_file_size = 100MB >> .bzr/branch/branch.conf
 bzr add .
+if [ $? -ne 0 ]; then exit; fi
 bzr commit -m "new upstream version"
+if [ $? -ne 0 ]; then exit; fi
 bzr push
+if [ $? -ne 0 ]; then exit; fi
 
 
 cd $SCRIPTFOLDER
+if [ $? -ne 0 ]; then exit; fi
 
 LAUNCHPADUBUNTU=$SCRIPTFOLDER/../../launchpad/client-beta-2017
 LAUNCHPADUBUNTU=`realpath $LAUNCHPADUBUNTU`
+if [ $? -ne 0 ]; then exit; fi
 echo Updating the code for creating Ubuntu beta packages in $LAUNCHPADUBUNTU
 rm -rf $LAUNCHPADUBUNTU/*
 
 echo Unpack tarball into the repository.
 tar --strip-components=1 -C $LAUNCHPADUBUNTU -xzf ~/Desktop/bibledit*tar.gz
+if [ $? -ne 0 ]; then exit; fi
 
 echo Add the debian folder to the repository.
 cp -r debian2017 $LAUNCHPADUBUNTU
+if [ $? -ne 0 ]; then exit; fi
 rm -rf $LAUNCHPADUBUNTU/debian
+if [ $? -ne 0 ]; then exit; fi
 mv $LAUNCHPADUBUNTU/debian2017 $LAUNCHPADUBUNTU/debian
+if [ $? -ne 0 ]; then exit; fi
 
 cd $LAUNCHPADUBUNTU
 find . -name .DS_Store -delete
 sed -i '' '/maximum_file_size/d' .bzr/branch/branch.conf
 echo add.maximum_file_size = 100MB >> .bzr/branch/branch.conf
 bzr add .
+if [ $? -ne 0 ]; then exit; fi
 bzr commit -m "new upstream version"
+if [ $? -ne 0 ]; then exit; fi
 bzr push
+if [ $? -ne 0 ]; then exit; fi
+
+
+echo Ready
 
