@@ -24,8 +24,9 @@ SCRIPTFOLDER=`pwd`
 echo Running builder in $SCRIPTFOLDER
 
 
-echo Create a tarball for Debian
-../debian/tarball.sh
+echo Create a tarball for the Linux Client
+../../linux/tarball.sh
+if [ $? -ne 0 ]; then exit; fi
 
 
 export LANG="C"
@@ -66,6 +67,8 @@ tar --strip-components=1 -C $LAUNCHPADUBUNTU -xzf ~/Desktop/bibledit*tar.gz
 
 echo Add the debian folder to the repository.
 cp -r debian2017 $LAUNCHPADUBUNTU
+rm -rf $LAUNCHPADUBUNTU/debian
+mv $LAUNCHPADUBUNTU/debian2017 $LAUNCHPADUBUNTU/debian
 
 cd $LAUNCHPADUBUNTU
 find . -name .DS_Store -delete
