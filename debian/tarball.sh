@@ -23,15 +23,6 @@ DEBIANSOURCE=`pwd`
 echo Running script from $DEBIANSOURCE.
 
 
-source ~/scr/sid-ip
-echo The IP address of the Debian machine is $DEBIANSID.
-
-
-echo Check that the Debian machine is alive.
-ping -c 1 $DEBIANSID
-if [ $? -ne 0 ]; then exit; fi
-
-
 echo Create a tarball for the Linux Client
 ../../linux/tarball.sh
 if [ $? -ne 0 ]; then exit; fi
@@ -145,6 +136,9 @@ scp $TMPDEBIAN/*.gz ~/Desktop
 if [ $? -ne 0 ]; then exit; fi
 
 
+source ~/scr/sid-ip
+if [ $? -ne 0 ]; then exit; fi
+echo The IP address of the Debian machine is $DEBIANSID.
 echo Copy the Debian tarball to the Debian builder.
-scp ~/Desktop/*.gz $DEBIANSID:.
+echo scp ~/Desktop/*.gz $DEBIANSID:.
 if [ $? -ne 0 ]; then exit; fi
