@@ -24,14 +24,8 @@ SCRIPTFOLDER=`pwd`
 echo Running builder in $SCRIPTFOLDER
 
 
-cd /tmp
-git clone https://github.com/bibledit/debianclient.git
-cd debianclient
-if [ $? -ne 0 ]; then exit; fi
-git pull
-if [ $? -ne 0 ]; then exit; fi
-DEBIANCLIENT=`pwd`
-echo Using Bibledit Debian source at $DEBIANCLIENT
+echo Create a tarball for Debian
+../debian/tarball.sh
 
 
 export LANG="C"
@@ -42,7 +36,12 @@ LAUNCHPADUBUNTU=$SCRIPTFOLDER/../../launchpad/client-beta
 LAUNCHPADUBUNTU=`realpath $LAUNCHPADUBUNTU`
 echo Updating the code for creating Ubuntu beta packages in $LAUNCHPADUBUNTU
 rm -rf $LAUNCHPADUBUNTU/*
-cp -r $DEBIANCLIENT/* $LAUNCHPADUBUNTU
+
+echo Unpack tarball into the repository.
+tar --strip-components=1 -C $LAUNCHPADUBUNTU -xzf ~/Desktop/bibledit*tar.gz
+
+echo Add the debian folder to the repository.
+cp -r debian $LAUNCHPADUBUNTU
 
 
 cd $LAUNCHPADUBUNTU
