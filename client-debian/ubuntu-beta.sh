@@ -18,26 +18,31 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 
-echo Create a tarball for the Linux Client.
-../../linux/tarball.sh
+SCRIPTFOLDER=`dirname $0`
+cd $SCRIPTFOLDER
+SCRIPTFOLDER=`pwd`
+echo Running builder in $SCRIPTFOLDER
+
+
+cd /tmp
+git clone https://github.com/bibledit/debianclient.git
+cd debianclient
 if [ $? -ne 0 ]; then exit; fi
-echo Create a tarball for Debian
-./tarball.sh
+git pull
 if [ $? -ne 0 ]; then exit; fi
-
-
-echo Update the repository that creates Ubuntu beta packages.
-
-
-LAUNCHPADUBUNTU=../../launchpad/ubuntu-client-beta
-rm -rf $LAUNCHPADUBUNTU/*
-
-
-tar --strip-components=1 -C $LAUNCHPADUBUNTU -xzf ~/Desktop/bibledit*tar.gz
+DEBIANCLIENT=`pwd`
+echo Using Bibledit Debian source at $DEBIANCLIENT
 
 
 export LANG="C"
 export LC_ALL="C"
+
+
+LAUNCHPADUBUNTU=$SCRIPTFOLDER/../../launchpad/client-beta
+LAUNCHPADUBUNTU=`realpath $LAUNCHPADUBUNTU`
+echo Updating the code for creating Ubuntu beta packages in $LAUNCHPADUBUNTU
+rm -rf $LAUNCHPADUBUNTU/*
+cp -r $DEBIANCLIENT/* $LAUNCHPADUBUNTU
 
 
 cd $LAUNCHPADUBUNTU
