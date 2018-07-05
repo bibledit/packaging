@@ -32,6 +32,8 @@ export LANG="C"
 export LC_ALL="C"
 
 
+cd $SCRIPTFOLDER
+
 LAUNCHPADUBUNTU=$SCRIPTFOLDER/../../launchpad/client-beta
 LAUNCHPADUBUNTU=`realpath $LAUNCHPADUBUNTU`
 echo Updating the code for creating Ubuntu beta packages in $LAUNCHPADUBUNTU
@@ -43,6 +45,27 @@ tar --strip-components=1 -C $LAUNCHPADUBUNTU -xzf ~/Desktop/bibledit*tar.gz
 echo Add the debian folder to the repository.
 cp -r debian $LAUNCHPADUBUNTU
 
+cd $LAUNCHPADUBUNTU
+find . -name .DS_Store -delete
+sed -i '' '/maximum_file_size/d' .bzr/branch/branch.conf
+echo add.maximum_file_size = 100MB >> .bzr/branch/branch.conf
+bzr add .
+bzr commit -m "new upstream version"
+bzr push
+
+
+cd $SCRIPTFOLDER
+
+LAUNCHPADUBUNTU=$SCRIPTFOLDER/../../launchpad/client-beta-2017
+LAUNCHPADUBUNTU=`realpath $LAUNCHPADUBUNTU`
+echo Updating the code for creating Ubuntu beta packages in $LAUNCHPADUBUNTU
+rm -rf $LAUNCHPADUBUNTU/*
+
+echo Unpack tarball into the repository.
+tar --strip-components=1 -C $LAUNCHPADUBUNTU -xzf ~/Desktop/bibledit*tar.gz
+
+echo Add the debian folder to the repository.
+cp -r debian2017 $LAUNCHPADUBUNTU
 
 cd $LAUNCHPADUBUNTU
 find . -name .DS_Store -delete
@@ -51,3 +74,4 @@ echo add.maximum_file_size = 100MB >> .bzr/branch/branch.conf
 bzr add .
 bzr commit -m "new upstream version"
 bzr push
+
