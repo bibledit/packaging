@@ -18,70 +18,82 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 
-echo Create a tarball for the Linux Client.
+SCRIPTFOLDER=`dirname $0`
+cd $SCRIPTFOLDER
+SCRIPTFOLDER=`pwd`
+echo Running builder in $SCRIPTFOLDER
+
+
+echo Create a tarball for the Linux Client
 ../../linux/tarball.sh
 if [ $? -ne 0 ]; then exit; fi
-echo Create a tarball for Debian
-./tarball.sh
-if [ $? -ne 0 ]; then exit; fi
-
-
-echo Update the repositories that create Ubuntu packages.
-
-
-# Bibledit support status:
-# Precise 12.04: No support: package libwebkit2gtk-3.0-dev and libwebkit2gtk-4.0-dev not available.
-
-
-LAUNCHPADUBUNTU=../../launchpad/ubuntu-client
-echo Clean repository at $LAUNCHPADUBUNTU.
-rm -rf $LAUNCHPADUBUNTU/*
-
-
-echo Unpack tarball into the repository.
-tar --strip-components=1 -C $LAUNCHPADUBUNTU -xzf ~/Desktop/bibledit*tar.gz
 
 
 export LANG="C"
 export LC_ALL="C"
 
 
-echo Change directory to repository.
-pushd $LAUNCHPADUBUNTU
-echo Remove clutter.
+cd $SCRIPTFOLDER
+if [ $? -ne 0 ]; then exit; fi
+
+LAUNCHPADUBUNTU=$SCRIPTFOLDER/../../launchpad/client
+LAUNCHPADUBUNTU=`realpath $LAUNCHPADUBUNTU`
+if [ $? -ne 0 ]; then exit; fi
+echo Updating the code for creating Ubuntu packages in $LAUNCHPADUBUNTU
+rm -rf $LAUNCHPADUBUNTU/*
+
+echo Unpack tarball into the repository.
+tar --strip-components=1 -C $LAUNCHPADUBUNTU -xzf ~/Desktop/bibledit*tar.gz
+if [ $? -ne 0 ]; then exit; fi
+
+echo Add the debian folder to the repository.
+cp -r debian $LAUNCHPADUBUNTU
+if [ $? -ne 0 ]; then exit; fi
+
+cd $LAUNCHPADUBUNTU
 find . -name .DS_Store -delete
-echo Commit to Launchpad.
 sed -i '' '/maximum_file_size/d' .bzr/branch/branch.conf
 echo add.maximum_file_size = 100MB >> .bzr/branch/branch.conf
 bzr add .
+if [ $? -ne 0 ]; then exit; fi
 bzr commit -m "new upstream version"
+if [ $? -ne 0 ]; then exit; fi
 bzr push
-echo Change directory back to origin.
-popd
+if [ $? -ne 0 ]; then exit; fi
 
 
-LAUNCHPADTRUSTY=../../launchpad/trusty-client
-echo Clean repository at $LAUNCHPADTRUSTY.
-rm -rf $LAUNCHPADTRUSTY/*
+cd $SCRIPTFOLDER
+if [ $? -ne 0 ]; then exit; fi
 
+LAUNCHPADUBUNTU=$SCRIPTFOLDER/../../launchpad/client-2017
+LAUNCHPADUBUNTU=`realpath $LAUNCHPADUBUNTU`
+if [ $? -ne 0 ]; then exit; fi
+echo Updating the code for creating Ubuntu packages in $LAUNCHPADUBUNTU
+rm -rf $LAUNCHPADUBUNTU/*
 
-echo Copy general Ubuntu data to the Trusty repository.
-cp -r $LAUNCHPADUBUNTU/* $LAUNCHPADTRUSTY
+echo Unpack tarball into the repository.
+tar --strip-components=1 -C $LAUNCHPADUBUNTU -xzf ~/Desktop/bibledit*tar.gz
+if [ $? -ne 0 ]; then exit; fi
 
+echo Add the debian folder to the repository.
+cp -r debian2017 $LAUNCHPADUBUNTU
+if [ $? -ne 0 ]; then exit; fi
+rm -rf $LAUNCHPADUBUNTU/debian
+if [ $? -ne 0 ]; then exit; fi
+mv $LAUNCHPADUBUNTU/debian2017 $LAUNCHPADUBUNTU/debian
+if [ $? -ne 0 ]; then exit; fi
 
-echo Change directory to repository.
-pushd $LAUNCHPADTRUSTY
-echo Update dependencies: Trusty has libwebkit2gtk-3.0-dev.
-sed -i.bak 's/libwebkit2gtk-4.0-dev/libwebkit2gtk-3.0-dev/g' debian/control
-rm debian/control.bak
-echo Remove clutter.
+cd $LAUNCHPADUBUNTU
 find . -name .DS_Store -delete
-echo Commit to Launchpad.
 sed -i '' '/maximum_file_size/d' .bzr/branch/branch.conf
 echo add.maximum_file_size = 100MB >> .bzr/branch/branch.conf
 bzr add .
+if [ $? -ne 0 ]; then exit; fi
 bzr commit -m "new upstream version"
+if [ $? -ne 0 ]; then exit; fi
 bzr push
-echo Change directory back to origin.
-popd
-    
+if [ $? -ne 0 ]; then exit; fi
+
+
+echo Ready
+
