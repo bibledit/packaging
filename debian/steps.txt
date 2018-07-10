@@ -62,8 +62,10 @@ $ gbp buildpackage --git-ignore-new --git-export-dir=/tmp/
 
 
 
-Do a pedantic lintian check.
+Do a number of checks.
 $ lintian --display-info --pedantic --no-tag-display-limit --info bibledit*changes bibledit*deb bibledit*dsc
+$ debc *.changes
+$ git diff <commit>
 
 
 Test the package.
