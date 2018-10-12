@@ -29,7 +29,7 @@ This will store the passphrase for the automated tools to use.
 
 Import the upstream tarball and use pristine-tar and sign tags.
 See: https://honk.sigxcpu.org/projects/git-buildpackage/manual-html/gbp.import.new.upstream.html
-$ gbp import-orig --pristine-tar --sign-tags ../bibledit-*.tar.gz
+$ gbp import-orig --pristine-tar --sign-tags ../*.tar.gz
 
 
 
@@ -63,7 +63,7 @@ $ gbp buildpackage --git-ignore-new --git-export-dir=/tmp/
 
 
 Do a number of checks.
-$ lintian --display-info --pedantic --no-tag-display-limit --info /tmp/bibledit*changes /tmp/bibledit*deb /tmp/bibledit*dsc
+$ lintian --display-info --pedantic --no-tag-display-limit --info /tmp/*changes /tmp/*deb /tmp/*dsc
 $ debc *.changes
 $ git diff <commit>
 
@@ -76,8 +76,12 @@ $ gbp buildpackage -S --git-tag --git-sign --git-export-dir=/tmp/
 
 
 Upload the package:
-$ dupload --to anonymous-ftp-master bibledit*.changes
+$ dupload --to anonymous-ftp-master /tmp/*.changes
+$ rm /tmp/*
 
 
 Push the changes to the remote repository.
-$ gbp push --verbose
+$ gbp push --pristine-tar
+$ git push --all
+$ git push --tags
+
