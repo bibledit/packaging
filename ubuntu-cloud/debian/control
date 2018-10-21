@@ -16,7 +16,7 @@ Vcs-Browser: https://github.com/bibledit/debian-alioth-bibledit-cloud.git
 Package: bibledit-cloud
 Architecture: any
 Depends: bibledit-cloud-data, ${shlibs:Depends}, ${misc:Depends}, adduser
-Recommends: fonts-sil-ezra, libsword-utils, poppler-utils, ldap-utils, zip
+Recommends: fonts-sil-ezra, libsword-utils, poppler-utils, ldap-utils, zip, certbot
 Description: Bible editor server
  An online tool for the Bible translator.
  Translate Bibles.
