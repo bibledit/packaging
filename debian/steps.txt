@@ -16,7 +16,7 @@ $ gbp pull --all
 
 
 Remove untracked files from the working tree
-$ git clean -f
+$ git clean -fd
 
 
 Sign tags and commits.
