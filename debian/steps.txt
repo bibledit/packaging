@@ -59,6 +59,15 @@ Build the package:
 $ gbp buildpackage --git-export-dir=/tmp/
 When having uncommitted changes in the branch:
 $ gbp buildpackage --git-ignore-new --git-export-dir=/tmp/
+When on the patch queue branch:
+$ gbp buildpackage --git-ignore-branch --git-export-dir=/tmp/
+
+
+
+Patches:
+$ gbp pq import
+$ gbp pq export
+$ gbp pq drop
 
 
 
@@ -72,7 +81,10 @@ Test the package.
 
 
 Package is OK: Sign the tag and build sources only with -S :
+$ rm /tmp/*
 $ gbp buildpackage -S --git-tag --git-sign --git-export-dir=/tmp/
+To include the .orig.tar.gz, add the -sa switch. 
+To force the exclusion of the original source, add the -sd switch.
 
 
 Upload the package:
@@ -85,3 +97,10 @@ $ gbp push --pristine-tar
 $ git push --all
 $ git push --tags
 
+
+To find the reverse dependencies:
+$ apt rdepends libsword*
+
+
+Update path:
+export PATH=$PATH:/sbin:/usr/sbin
