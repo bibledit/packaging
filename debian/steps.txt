@@ -2,9 +2,8 @@ Steps to build the Debian package.
 
 
 On Debian, clone the repository.
-$ gbp clone --all git+ssh://joe@scm.alioth.debian.org/git/pkg-crosswire/bibledit-gtk.git
-The above repository no longer exists, a temporal replaceent is this:
-$ gbp clone --all https://<username>:<password>@github.com/bibledit/debianclient.git
+$ gbp clone --all git@salsa.debian.org:pkg-crosswire-team/bibledit.git
+
 
 
 On macOS, create a tarball suitable for Debian.
