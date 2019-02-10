@@ -30,6 +30,7 @@ Package: bibledit-data
 Architecture: all
 Multi-Arch: foreign
 Depends: ${shlibs:Depends}, ${misc:Depends}
+Recommends: fonts-sil-ezra
 Breaks: bibledit-gtk-data (<< 4.9-1~)
 Replaces: bibledit-gtk-data (<< 4.9-1~)
 Description: Data for bibledit
