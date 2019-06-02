@@ -28,3 +28,7 @@ Same for upload to experimental.
 $ sbuild -d experimental -c unstable-amd64-sbuild
 
 
+Creating a patch for a package:
+https://wiki.debian.org/UsingQuilt
+https://raphaelhertzog.com/2011/07/04/how-to-prepare-patches-for-debian-packages/
+
