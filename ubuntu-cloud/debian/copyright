@@ -5,7 +5,7 @@ Source: http://bibledit.org/linux/bibledit-1.0.699.tar.gz
 
 Files: *
  debian/*
-Copyright: 2003-2018 Teus Benschop
+Copyright: 2003-2019 Teus Benschop
 License: GPL-3.0+
 
 Files: mbedtls/*
