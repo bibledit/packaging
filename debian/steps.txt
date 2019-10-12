@@ -1,13 +1,14 @@
-Steps to build the Debian package.
+Steps to build the Debian packages.
 
 
 On Debian, clone the repository.
 $ gbp clone --all git@salsa.debian.org:pkg-crosswire-team/bibledit.git
-
+$ gbp clone --all git@salsa.debian.org:debian/bibledit-cloud.git
 
 
 On macOS, create a tarball suitable for Debian.
-$ ./tarball.sh
+$ ./tarball-client.sh
+$ ./tarball-cloud.sh
 
 
 Pull all changes.
