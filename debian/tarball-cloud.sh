@@ -119,6 +119,8 @@ rm valgrind
 if [ $? -ne 0 ]; then exit; fi
 rm dev
 if [ $? -ne 0 ]; then exit; fi
+rm -rf unittests
+if [ $? -ne 0 ]; then exit; fi
 
 
 echo Disable mach.h definitions.
