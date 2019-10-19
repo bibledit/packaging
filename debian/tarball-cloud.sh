@@ -119,6 +119,10 @@ rm valgrind
 if [ $? -ne 0 ]; then exit; fi
 rm dev
 if [ $? -ne 0 ]; then exit; fi
+# No test data in the Debian tarball.
+# Some data gives a lintian warning like this:
+# W: bibledit-cloud-data: executable-not-elf-or-script usr/share/bibledit-cloud/unittests/..
+# There will be licensing issues to be fixed too.
 rm -rf unittests
 if [ $? -ne 0 ]; then exit; fi
 
