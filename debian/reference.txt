@@ -11,7 +11,7 @@ $ gpg2 --armor --detach-sign --batch --yes foo*.gz
 
 
 Do a license check=:
-$ licensecheck --recursive --ignore debian --deb-machine *"
+$ licensecheck --recursive --ignore debian --deb-machine *
 
 
 Do a source scan:
