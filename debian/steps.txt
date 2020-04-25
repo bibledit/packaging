@@ -39,7 +39,7 @@ $ git show <tag>
 
 
 
-Sign the above commit manually.
+Optionally sign the above commit manually.
 $ git commit -S --amend
 
 
