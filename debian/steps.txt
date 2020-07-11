@@ -51,7 +51,18 @@ More information: https://harryrschwartz.com/2014/11/01/automatically-signing-yo
 
 
 
+Patches:
+$ gbp pq import
+Make commits to create another patch.
+$ git add debian/patches
+$ git commit ...
+$ gbp pq export
+$ gbp pq drop
+
+
+
 Update the debian/changelog to the correct version.
+$ gbp dch --git-author
 $ gbp dch --git-author --release
 
 
@@ -62,13 +73,6 @@ When having uncommitted changes in the branch:
 $ gbp buildpackage --git-ignore-new --git-export-dir=/tmp/
 When on the patch queue branch:
 $ gbp buildpackage --git-ignore-branch --git-export-dir=/tmp/
-
-
-
-Patches:
-$ gbp pq import
-$ gbp pq export
-$ gbp pq drop
 
 
 
@@ -101,9 +105,19 @@ $ git push --all
 $ git push --tags
 
 
+
+Notes
+=====
+
+
 To find the reverse dependencies:
 $ apt rdepends libsword*
 
 
 Update path:
 export PATH=$PATH:/sbin:/usr/sbin
+
+
+Repack to +dfsg file:
+https://wiki.debian.org/Javascript/Repacking
+
