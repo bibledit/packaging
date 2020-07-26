@@ -64,6 +64,7 @@ $ gbp pq drop
 Update the debian/changelog to the correct version.
 $ gbp dch --git-author
 $ gbp dch --git-author --release
+Without doing the above, the package won't build.
 
 
 
