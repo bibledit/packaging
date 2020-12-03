@@ -11,6 +11,9 @@ $ ./tarball-client.sh
 $ ./tarball-cloud.sh
 Or download one for bibledit-desktop.
 
+Or download upstream tarball:
+$ uscan --download-current-version --verbose
+
 
 Pull all changes.
 $ gbp pull --all
@@ -122,3 +125,7 @@ export PATH=$PATH:/sbin:/usr/sbin
 Repack to +dfsg file:
 https://wiki.debian.org/Javascript/Repacking
 
+
+
+To build source-only package.
+$ debuild -S
