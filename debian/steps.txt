@@ -5,6 +5,8 @@ On Debian, clone the repository.
 $ gbp clone --all git@salsa.debian.org:pkg-crosswire-team/bibledit.git
 $ gbp clone --all git@salsa.debian.org:debian/bibledit-cloud.git
 $ gbp clone --all git@salsa.debian.org:debian/bibledit-desktop.git
+$ gbp clone --all git@salsa.debian.org:pkg-crosswire-team/sword-comm-mhc.git
+
 
 On macOS, create a tarball suitable for Debian.
 $ ./tarball-client.sh
