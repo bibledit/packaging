@@ -101,7 +101,8 @@ To force the exclusion of the original source, add the -sd switch.
 
 
 Upload the package:
-$ dupload --to anonymous-ftp-master /tmp/*.changes
+# $ dupload --to anonymous-ftp-master /tmp/*.changes
+$ dput /tmp/*.changes
 $ rm /tmp/*
 
 
