@@ -1,0 +1,8 @@
+# The tool "lintian-overrider" makes it trivial
+# to find the way of overriding a lintian message.
+# $ lintian --pedantic --no-tag-display-limit bibledit*changes bibledit*deb bibledit*dsc | ./lintian-utils/bin/lintian-overrider
+# git clone git://anonscm.debian.org/users/nthykier/lintian-utils.git
+
+# Override pedantic lintian messages.
+bibledit-cloud-data: font-in-non-font-package
+bibledit-cloud-data: package-contains-empty-directory

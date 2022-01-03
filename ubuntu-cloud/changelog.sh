@@ -27,4 +27,7 @@ echo -n " -- Teus Benschop <teusjannette@gmail.com>  " >> changelog
 date -R >> changelog
 echo >> changelog
 cat debian/changelog >> changelog
-mv changelog debian/changelog
+cp changelog debian/changelog
+cp changelog debian-old/changelog
+rm changelog
+

@@ -29,18 +29,58 @@ rm -rf $LAUNCHPADUBUNTU/*
 
 
 tar --strip-components=1 -C $LAUNCHPADUBUNTU -xzf ~/Desktop/bibledit-cloud*tar.gz
+if [ $? -ne 0 ]; then exit; fi
 
 
 export LANG="C"
 export LC_ALL="C"
 
 
-cd $LAUNCHPADUBUNTU
+pushd $LAUNCHPADUBUNTU
+if [ $? -ne 0 ]; then exit; fi
 find . -name .DS_Store -delete
 sed -i '' '/maximum_file_size/d' .bzr/branch/branch.conf
 echo add.maximum_file_size = 100MB >> .bzr/branch/branch.conf
+if [ $? -ne 0 ]; then exit; fi
 bzr add .
+if [ $? -ne 0 ]; then exit; fi
 bzr commit -m "new upstream version"
 bzr push
+if [ $? -ne 0 ]; then exit; fi
+popd
 
+
+LAUNCHPADUBUNTU=../../launchpad/ubuntu-cloud-beta-old
+rm -rf $LAUNCHPADUBUNTU/*
+
+
+tar --strip-components=1 -C $LAUNCHPADUBUNTU -xzf ~/Desktop/bibledit-cloud*tar.gz
+if [ $? -ne 0 ]; then exit; fi
+
+
+export LANG="C"
+export LC_ALL="C"
+
+
+echo Add the debian folder to the repository.
+cp -r debian-old $LAUNCHPADUBUNTU
+if [ $? -ne 0 ]; then exit; fi
+rm -rf $LAUNCHPADUBUNTU/debian
+if [ $? -ne 0 ]; then exit; fi
+mv $LAUNCHPADUBUNTU/debian-old $LAUNCHPADUBUNTU/debian
+if [ $? -ne 0 ]; then exit; fi
+
+
+pushd $LAUNCHPADUBUNTU
+if [ $? -ne 0 ]; then exit; fi
+find . -name .DS_Store -delete
+sed -i '' '/maximum_file_size/d' .bzr/branch/branch.conf
+echo add.maximum_file_size = 100MB >> .bzr/branch/branch.conf
+if [ $? -ne 0 ]; then exit; fi
+bzr add .
+if [ $? -ne 0 ]; then exit; fi
+bzr commit -m "new upstream version"
+bzr push
+if [ $? -ne 0 ]; then exit; fi
+popd
 
