@@ -28,5 +28,5 @@ date -R >> changelog
 echo >> changelog
 cat debian/changelog >> changelog
 cp changelog debian/changelog
-cp changelog debian2017/changelog
+#cp changelog debian2017/changelog
 rm changelog

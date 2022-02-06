@@ -25,7 +25,7 @@ echo Running builder in $SCRIPTFOLDER
 
 
 echo Create a tarball for the Linux Client
-../../linux/tarball.sh
+../../linux/tarball-macos.sh
 if [ $? -ne 0 ]; then exit; fi
 
 
