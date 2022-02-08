@@ -28,7 +28,7 @@ if [ $? -ne 0 ]; then exit; fi
 
 
 echo Create a tarball for the Linux Client
-../../linux/tarball.sh
+../../linux/tarball-macos.sh
 if [ $? -ne 0 ]; then exit; fi
 echo A tarball was created at $DEBIANSID
 
