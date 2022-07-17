@@ -36,6 +36,7 @@ This will store the passphrase for the automated tools to use.
 Import the upstream tarball and use pristine-tar and sign tags.
 See: https://honk.sigxcpu.org/projects/git-buildpackage/manual-html/gbp.import.new.upstream.html
 $ gbp import-orig --pristine-tar --sign-tags ../*.tar.gz
+$ gbp import-orig --pristine-tar --sign-tags ../*.tar.xz
 
 
 

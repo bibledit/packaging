@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Copyright (©) 2003-2020 Teus Benschop.
+# Copyright (©) 2003-2022 Teus Benschop.
 
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -114,7 +114,7 @@ echo Remove some files from the core library
 rm bibledit
 if [ $? -ne 0 ]; then exit; fi
 rm generate
-if [ $? -ne 0 ]; then exit; fi
+#if [ $? -ne 0 ]; then exit; fi
 rm valgrind
 if [ $? -ne 0 ]; then exit; fi
 rm dev
