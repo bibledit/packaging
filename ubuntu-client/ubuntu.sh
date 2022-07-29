@@ -91,7 +91,7 @@ bzr add .
 if [ $? -ne 0 ]; then exit; fi
 bzr commit -m "new upstream version"
 if [ $? -ne 0 ]; then exit; fi
-bzr push
+bzr push bzr+ssh://teusbenschop@bazaar.launchpad.net/~bibledit/bibledit/client/
 if [ $? -ne 0 ]; then exit; fi
 
 
