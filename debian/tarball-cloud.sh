@@ -51,10 +51,12 @@ popd
 
 # The script unpacks the Bibledit Cloud tarball,
 # modifies it, and repacks it into a Debian tarball.
-# The reason for doing so is that the Debian builder would otherwise notice
-# differences between the supplied tarball and the modified source.
-# dpkg-source: error: aborting due to unexpected upstream changes
-# Another reason is that in this way it does not need to generate patches in the 'debian' folder.
+# Reasons for doing so are among others:
+# - The Debian builder would otherwise notice differences
+#   between the supplied tarball and the modified source.
+#   dpkg-source: error: aborting due to unexpected upstream changes
+# - In this way it does not need to generate patches in the 'debian' folder.
+# - Comply with the Debian Free Software Guidelines.
 
 
 TMPDEBIAN=/tmp/bibledit-debian
@@ -154,6 +156,14 @@ rm *.bak
 # There had been a case that building used the embedded *.h files, leading to segmentation faults.
 # For cleanness, remove the whole mbedtls directory, so all traces of it are gone completely.
 rm -rf mbedtls*
+
+
+echo Link with the system-provided utf8proc library.
+sed -i.bak '/utf8proc/d' Makefile.am
+if [ $? -ne 0 ]; then exit; fi
+rm *.bak
+# Remove the embedded utf8proc files.
+rm -rf utf8proc*
 
 
 echo Reconfiguring the source.
