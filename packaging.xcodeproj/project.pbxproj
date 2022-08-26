@@ -10,7 +10,6 @@
 		CA27F3A41ED3682A003F4813 /* ubuntu-client */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "ubuntu-client"; sourceTree = "<group>"; };
 		CA89F8421ED595E30018A205 /* ubuntu-cloud */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "ubuntu-cloud"; sourceTree = "<group>"; };
 		CAC8F86C203EF6ED00160A42 /* gpg2sid.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = gpg2sid.sh; sourceTree = "<group>"; };
-		CACAF11420EE2297001B5F25 /* debian */ = {isa = PBXFileReference; lastKnownFileType = folder; path = debian; sourceTree = "<group>"; };
 		CAD637F6203AED6A00CA7577 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		CAD637F7203AED7100CA7577 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -21,7 +20,6 @@
 			children = (
 				CA27F3A41ED3682A003F4813 /* ubuntu-client */,
 				CA89F8421ED595E30018A205 /* ubuntu-cloud */,
-				CACAF11420EE2297001B5F25 /* debian */,
 				CAC8F86C203EF6ED00160A42 /* gpg2sid.sh */,
 				CAD637F6203AED6A00CA7577 /* LICENSE */,
 				CAD637F7203AED7100CA7577 /* README.md */,
