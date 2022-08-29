@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 # Copyright (©) 2003-2022 Teus Benschop.
 
 # This program is free software; you can redistribute it and/or modify
@@ -18,6 +17,11 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 
+source ~/scr/sid-ip
+export LANG="C"
+export LC_ALL="C"
+
+
 SCRIPTFOLDER=`dirname $0`
 cd $SCRIPTFOLDER
 SCRIPTFOLDER=`pwd`
@@ -25,41 +29,24 @@ echo Running builder in $SCRIPTFOLDER
 
 
 echo Create a tarball for the Linux Client
+rm -f ~/Desktop/bibledit-5*.tar.gz
 ../../linux/tarball-macos.sh
 if [ $? -ne 0 ]; then exit; fi
 
 
-export LANG="C"
-export LC_ALL="C"
-
-
-cd $SCRIPTFOLDER
+echo Copy the tarball to sid
+scp ~/Desktop/bibledit-5*.tar.gz $DEBIANSID:/tmp
 if [ $? -ne 0 ]; then exit; fi
 
-LAUNCHPADUBUNTU=$SCRIPTFOLDER/../../launchpad/client-beta
-LAUNCHPADUBUNTU=`realpath $LAUNCHPADUBUNTU`
-if [ $? -ne 0 ]; then exit; fi
-echo Updating the code for creating Ubuntu beta packages in $LAUNCHPADUBUNTU
-rm -rf $LAUNCHPADUBUNTU/*
 
-echo Unpack tarball into the repository.
-tar --strip-components=1 -C $LAUNCHPADUBUNTU -xzf ~/Desktop/bibledit*tar.gz
-if [ $? -ne 0 ]; then exit; fi
+echo Copy the debian folder to sid
+ssh $DEBIANSID "rm -rf /tmp/debian"
+scp -r debian $DEBIANSID:/tmp
 
-echo Add the debian folder to the repository.
-cp -r debian $LAUNCHPADUBUNTU
-if [ $? -ne 0 ]; then exit; fi
 
-cd $LAUNCHPADUBUNTU
-find . -name .DS_Store -delete
-sed -i '' '/maximum_file_size/d' .bzr/branch/branch.conf
-echo add.maximum_file_size = 100MB >> .bzr/branch/branch.conf
-bzr add .
+echo Copy the sid script to sid
+scp ubuntu-beta-sid.sh $DEBIANSID:.
 if [ $? -ne 0 ]; then exit; fi
-bzr commit -m "new upstream version"
-if [ $? -ne 0 ]; then exit; fi
-bzr push bzr+ssh://teusbenschop@bazaar.launchpad.net/~bibledit/bibledit/client-beta/
-if [ $? -ne 0 ]; then exit; fi
+echo Run the script ubuntu-beta-sid.sh from $DEBIANSID to continue
 
-echo Ready
 
