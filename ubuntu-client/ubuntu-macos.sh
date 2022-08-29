@@ -1,5 +1,6 @@
 #!/bin/bash
 
+
 # Copyright (©) 2003-2022 Teus Benschop.
 
 # This program is free software; you can redistribute it and/or modify
@@ -38,9 +39,8 @@ ssh $DEBIANSID "rm -rf /tmp/debian"
 scp -r debian $DEBIANSID:/tmp
 
 
-echo Copy the beta sid script to sid
-scp ubuntu-beta-sid.sh $DEBIANSID:.
+echo Copy the sid script to sid
+scp ubuntu-sid.sh $DEBIANSID:.
 if [ $? -ne 0 ]; then exit; fi
-echo Run the script ubuntu-beta-sid.sh from $DEBIANSID to continue
-
+echo Run the script ubuntu-sid.sh from $DEBIANSID to continue
 
