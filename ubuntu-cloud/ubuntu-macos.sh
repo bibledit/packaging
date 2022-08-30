@@ -22,14 +22,13 @@ export LANG="C"
 export LC_ALL="C"
 
 
-echo Create a tarball for the Linux Client
-rm -f ~/Desktop/bibledit-5*.tar.gz
-../../linux/tarball-macos.sh
+echo Create a tarball for Bibledit Cloud
+./tarball.sh
 if [ $? -ne 0 ]; then exit; fi
 
 
-echo Copy the tarball to sid
-scp ~/Desktop/bibledit-5*.tar.gz $DEBIANSID:/tmp
+echo Copy the Bibledit Cloud tarball to sid
+scp ~/Desktop/bibledit-cloud*.tar.gz $DEBIANSID:/tmp
 if [ $? -ne 0 ]; then exit; fi
 
 
@@ -38,9 +37,16 @@ ssh $DEBIANSID "rm -rf /tmp/debian"
 scp -r debian $DEBIANSID:/tmp
 
 
-echo Copy the beta sid script to sid
+echo Copy the older debian folder to sid
+ssh $DEBIANSID "rm -rf /tmp/debian-old"
+scp -r debian-old $DEBIANSID:/tmp
+
+
+echo Copy the beta sid scripts to sid
 scp ubuntu-beta-sid.sh $DEBIANSID:.
+scp ubuntu-sid.sh $DEBIANSID:.
 if [ $? -ne 0 ]; then exit; fi
 echo Run the script ubuntu-beta-sid.sh from $DEBIANSID to continue
-
+echo or
+echo Run the script ubuntu-sid.sh from $DEBIANSID to continue
 
