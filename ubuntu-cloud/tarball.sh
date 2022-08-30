@@ -23,6 +23,9 @@ DEBIANSOURCE=`pwd`
 echo Using Debian packaging source at $DEBIANSOURCE.
 
 
+rm -f ~/Desktop/bibledit-cloud*tar.gz
+
+
 # If the debian/README* or README.Debian files contain no useful content,
 # they should be updated with something useful, or else be removed.
 
@@ -170,7 +173,6 @@ if [ $? -ne 0 ]; then exit; fi
 
 
 echo Copy the Debian tarball to the Desktop.
-rm -f ~/Desktop/bibledit-*gz
 scp $TMPDEBIAN/*.gz ~/Desktop
 if [ $? -ne 0 ]; then exit; fi
 

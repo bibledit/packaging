@@ -20,6 +20,7 @@
 export LANG="C"
 export LC_ALL="C"
 
+
 LAUNCHPADUBUNTU=~/launchpad/client
 LAUNCHPADUBUNTU=`realpath $LAUNCHPADUBUNTU`
 if [ $? -ne 0 ]; then exit; fi
