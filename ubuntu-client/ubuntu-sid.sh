@@ -54,7 +54,7 @@ if [ $? -ne 0 ]; then exit; fi
 echo The script removes itself
 cd
 if [ $? -ne 0 ]; then exit; fi
-rm ubuntu-beta-sid.sh
+rm ubuntu-sid.sh
 if [ $? -ne 0 ]; then exit; fi
 
 
