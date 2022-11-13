@@ -114,7 +114,7 @@ echo Remove some files from the core library
 # Delete it so it can't be used accidentially.
 rm bibledit
 if [ $? -ne 0 ]; then exit; fi
-rm generate
+rm -f generate
 if [ $? -ne 0 ]; then exit; fi
 rm valgrind
 if [ $? -ne 0 ]; then exit; fi
