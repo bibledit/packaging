@@ -19,7 +19,7 @@
 
 VERSION=`grep PACKAGE_VERSION ../../cloud/config.h | sed 's/#define PACKAGE_VERSION //' | sed 's/"//g'`
 echo Updating the debian/changelog to $VERSION
-echo "bibledit-cloud ($VERSION-1) unstable; urgency=low" > changelog
+echo "bibledit-cloud ($VERSION-1) unstable; urgency=medium" > changelog
 echo >> changelog
 echo "  * new upstream version" >> changelog
 echo >> changelog
