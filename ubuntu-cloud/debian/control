@@ -20,7 +20,7 @@ Package: bibledit-cloud
 Architecture: any
 Depends: bibledit-cloud-data, ${shlibs:Depends}, ${misc:Depends}, adduser,
  zip, unzip, git, gzip, tar
-Recommends: fonts-sil-ezra, libsword-utils, poppler-utils, ldap-utils, certbot, diatheke
+Recommends: fonts-sil-ezra, libsword-utils, ldap-utils, certbot, diatheke
 Description: Bible editor server
  An online tool for the Bible translator.
  Translate Bibles.
