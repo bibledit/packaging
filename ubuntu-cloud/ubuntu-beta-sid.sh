@@ -18,6 +18,10 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 
+# Exit script on error.
+set -e
+
+
 export LANG="C"
 export LC_ALL="C"
 
@@ -28,58 +32,43 @@ echo Updates the repository that creates Ubuntu beta packages.
 LAUNCHPADUBUNTU=$HOME/launchpad/ubuntu-cloud-beta
 echo Local repository at $LAUNCHPADUBUNTU
 rm -rf $LAUNCHPADUBUNTU/*
-if [ $? -ne 0 ]; then exit; fi
 
 
 tar --strip-components=1 -C $LAUNCHPADUBUNTU -xzf /tmp/bibledit-cloud*tar.gz
-if [ $? -ne 0 ]; then exit; fi
 
 
 pushd $LAUNCHPADUBUNTU
-if [ $? -ne 0 ]; then exit; fi
 find . -name .DS_Store -delete
 find . -name HasenundFrîsche.txt -delete
 sed -i '/maximum_file_size/d' .bzr/branch/branch.conf
 echo add.maximum_file_size = 100MB >> .bzr/branch/branch.conf
-if [ $? -ne 0 ]; then exit; fi
 bzr add .
-if [ $? -ne 0 ]; then exit; fi
 bzr commit -m "new upstream version"
 bzr push
-if [ $? -ne 0 ]; then exit; fi
 popd
 
 
 #LAUNCHPADUBUNTU=$HOME/launchpad/ubuntu-cloud-beta-old
 #echo Local repository at $LAUNCHPADUBUNTU
 #rm -rf $LAUNCHPADUBUNTU/*
-#if [ $? -ne 0 ]; then exit; fi
 
 
 #tar --strip-components=1 -C $LAUNCHPADUBUNTU -xzf /tmp/bibledit-cloud*tar.gz
-#if [ $? -ne 0 ]; then exit; fi
 
 
 #echo Add the old debian folder to the repository.
 #cp -r debian-old $LAUNCHPADUBUNTU
-#if [ $? -ne 0 ]; then exit; fi
 #rm -rf $LAUNCHPADUBUNTU/debian
-#if [ $? -ne 0 ]; then exit; fi
 #mv $LAUNCHPADUBUNTU/debian-old $LAUNCHPADUBUNTU/debian
-#if [ $? -ne 0 ]; then exit; fi
 
 
 #pushd $LAUNCHPADUBUNTU
-#if [ $? -ne 0 ]; then exit; fi
 #find . -name .DS_Store -delete
 #find . -name HasenundFrîsche.txt -delete
 #sed -i '/maximum_file_size/d' .bzr/branch/branch.conf
 #echo add.maximum_file_size = 100MB >> .bzr/branch/branch.conf
-#if [ $? -ne 0 ]; then exit; fi
 #bzr add .
-#if [ $? -ne 0 ]; then exit; fi
 #bzr commit -m "new upstream version"
 #bzr push
-#if [ $? -ne 0 ]; then exit; fi
 #popd
 

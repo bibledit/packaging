@@ -18,24 +18,25 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 
+# Exit script on error.
+set -e
+
+
 export LANG="C"
 export LC_ALL="C"
 
 LAUNCHPADUBUNTU=~/launchpad/client-beta
 LAUNCHPADUBUNTU=`realpath $LAUNCHPADUBUNTU`
-if [ $? -ne 0 ]; then exit; fi
 echo Updating the code for creating Ubuntu beta packages in $LAUNCHPADUBUNTU
 rm -rf $LAUNCHPADUBUNTU/*
 
 
 echo Unpack tarball into the repository.
 tar --strip-components=1 -C $LAUNCHPADUBUNTU -xzf ~/bibledit-5*tar.gz
-if [ $? -ne 0 ]; then exit; fi
 
 
 echo Add the debian folder to the repository.
 cp -r /tmp/debian $LAUNCHPADUBUNTU
-if [ $? -ne 0 ]; then exit; fi
 
 
 echo Commit the code in the repository and push
@@ -44,18 +45,13 @@ find . -name .DS_Store -delete
 sed -i '/maximum_file_size/d' .bzr/branch/branch.conf
 echo add.maximum_file_size = 100MB >> .bzr/branch/branch.conf
 bzr add .
-if [ $? -ne 0 ]; then exit; fi
 bzr commit -m "new upstream version"
-if [ $? -ne 0 ]; then exit; fi
 bzr push bzr+ssh://teusbenschop@bazaar.launchpad.net/~bibledit/bibledit/client-beta/
-if [ $? -ne 0 ]; then exit; fi
 
 
 echo The script removes itself
 cd
-if [ $? -ne 0 ]; then exit; fi
 rm ubuntu-beta-sid.sh
-if [ $? -ne 0 ]; then exit; fi
 
 
 echo Ready

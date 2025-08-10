@@ -17,6 +17,10 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 
+# Exit script on error.
+set -e
+
+
 source ~/scr/sid-ip
 export LANG="C"
 export LC_ALL="C"
@@ -25,12 +29,10 @@ export LC_ALL="C"
 echo Create a tarball for the Linux Client
 rm -f ~/Desktop/bibledit-5*.tar.gz
 ../../linux/tarball-macos.sh
-if [ $? -ne 0 ]; then exit; fi
 
 
 echo Copy the tarball to sid
 scp ~/Desktop/bibledit-5*.tar.gz $DEBIANSID:/tmp
-if [ $? -ne 0 ]; then exit; fi
 
 
 echo Copy the debian folder to sid
@@ -41,7 +43,6 @@ scp -r debian $DEBIANSID:/tmp
 echo Copy the sid scripts to sid
 scp ubuntu-sid.sh $DEBIANSID:.
 scp ubuntu-beta-sid.sh $DEBIANSID:.
-if [ $? -ne 0 ]; then exit; fi
 echo Run the script ubuntu-sid.sh from $DEBIANSID to continue
 echo or:
 echo Run the script ubuntu-beta-sid.sh from $DEBIANSID to continue
