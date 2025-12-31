@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 # Copyright (©) 2003-2026 Teus Benschop.
 
 # This program is free software; you can redistribute it and/or modify
@@ -18,41 +17,36 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 
-# Exit script on error.
+echo Exit script on error
 set -e
 
 
-export LANG="C"
-export LC_ALL="C"
+echo Create a tarball for the Linux Client
+rm -f ~/Desktop/bibledit-5*.tar.gz
+../../linux/tarball-macos.sh
 
-LAUNCHPADUBUNTU=~/launchpad/client-beta
+
+LAUNCHPADUBUNTU=~/dev/launchpad/ubuntu-client
 LAUNCHPADUBUNTU=`realpath $LAUNCHPADUBUNTU`
-echo Updating the code for creating Ubuntu beta packages in $LAUNCHPADUBUNTU
+echo Updating the code for creating Ubuntu release packages in $LAUNCHPADUBUNTU
 rm -rf $LAUNCHPADUBUNTU/*
 
 
-echo Unpack tarball into the repository.
-tar --strip-components=1 -C $LAUNCHPADUBUNTU -xzf ~/bibledit-5*tar.gz
+echo Unpack tarball into the repository
+tar --strip-components=1 -C $LAUNCHPADUBUNTU -xzf ~/Desktop/bibledit-5*tar.gz
 
 
-echo Add the debian folder to the repository.
-cp -r /tmp/debian $LAUNCHPADUBUNTU
+echo Add the debian folder to the repository
+cp -r debian $LAUNCHPADUBUNTU
 
 
 echo Commit the code in the repository and push
-cd $LAUNCHPADUBUNTU
+pushd $LAUNCHPADUBUNTU
 find . -name .DS_Store -delete
-sed -i '/maximum_file_size/d' .bzr/branch/branch.conf
-echo add.maximum_file_size = 100MB >> .bzr/branch/branch.conf
-bzr add .
-bzr commit -m "new upstream version"
-bzr push bzr+ssh://teusbenschop@bazaar.launchpad.net/~bibledit/bibledit/client-beta/
-
-
-echo The script removes itself
-cd
-rm ubuntu-beta-sid.sh
+git add .
+git commit -a -m "new upstream version"
+git push
+popd
 
 
 echo Ready
-

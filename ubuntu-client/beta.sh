@@ -17,13 +17,8 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 
-# Exit script on error.
+echo Exit script on error
 set -e
-
-
-source ~/scr/sid-ip
-export LANG="C"
-export LC_ALL="C"
 
 
 echo Create a tarball for the Linux Client
@@ -31,19 +26,27 @@ rm -f ~/Desktop/bibledit-5*.tar.gz
 ../../linux/tarball-macos.sh
 
 
-echo Copy the tarball to sid
-scp ~/Desktop/bibledit-5*.tar.gz $DEBIANSID:/tmp
+LAUNCHPADUBUNTU=~/dev/launchpad/ubuntu-client-beta
+LAUNCHPADUBUNTU=`realpath $LAUNCHPADUBUNTU`
+echo Updating the code for creating Ubuntu beta packages in $LAUNCHPADUBUNTU
+rm -rf $LAUNCHPADUBUNTU/*
 
 
-echo Copy the debian folder to sid
-ssh $DEBIANSID "rm -rf /tmp/debian"
-scp -r debian $DEBIANSID:/tmp
+echo Unpack tarball into the repository
+tar --strip-components=1 -C $LAUNCHPADUBUNTU -xzf ~/Desktop/bibledit-5*tar.gz
 
 
-echo Copy the sid scripts to sid
-scp ubuntu-sid.sh $DEBIANSID:.
-scp ubuntu-beta-sid.sh $DEBIANSID:.
-echo Run the script ubuntu-sid.sh from $DEBIANSID to continue
-echo or:
-echo Run the script ubuntu-beta-sid.sh from $DEBIANSID to continue
+echo Add the debian folder to the repository
+cp -r debian $LAUNCHPADUBUNTU
 
+
+echo Commit the code in the repository and push
+pushd $LAUNCHPADUBUNTU
+find . -name .DS_Store -delete
+git add .
+git commit -a -m "new upstream version"
+git push
+popd
+
+
+echo Ready
