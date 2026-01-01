@@ -17,37 +17,35 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 
-# Exit script on error.
+echo Exit script on error
 set -e
-
-
-source ~/scr/sid-ip
-export LANG="C"
-export LC_ALL="C"
 
 
 echo Create a tarball for Bibledit Cloud
 ./tarball.sh
 
 
-echo Copy the Bibledit Cloud tarball to sid
-scp ~/Desktop/bibledit-cloud*.tar.gz $DEBIANSID:/tmp
+echo Updating the git repository that contains sources for Ubuntu packages
 
 
-echo Copy the debian folder to sid
-ssh $DEBIANSID "rm -rf /tmp/debian"
-scp -r debian $DEBIANSID:/tmp
+LAUNCHPADUBUNTU=$HOME/dev/launchpad/ubuntu-cloud
+echo Local repository at $LAUNCHPADUBUNTU
+rm -rf $LAUNCHPADUBUNTU/*
 
 
-echo Copy the older debian folder to sid
-ssh $DEBIANSID "rm -rf /tmp/debian-old"
-scp -r debian-old $DEBIANSID:/tmp
+echo Unpack the tarball from the Desktop
+tar --strip-components=1 -C $LAUNCHPADUBUNTU -xzf ~/Desktop/bibledit-cloud*tar.gz
 
 
-echo Copy the beta sid scripts to sid
-scp ubuntu-beta-sid.sh $DEBIANSID:.
-scp ubuntu-sid.sh $DEBIANSID:.
-echo Run the script ubuntu-beta-sid.sh from $DEBIANSID to continue
-echo or
-echo Run the script ubuntu-sid.sh from $DEBIANSID to continue
+pushd $LAUNCHPADUBUNTU
+find . -name .DS_Store -delete
+find . -name HasenundFrîsche.txt -delete
+echo Push data to Launchpad
+git add .
+git commit -a -m "new upstream version"
+git push
+popd
+
+
+echo Ready
 
