@@ -3,12 +3,11 @@ Section: editors
 Priority: extra
 Maintainer: CrossWire Packaging Team <pkg-crosswire-devel@lists.alioth.debian.org>
 Uploaders: Jonathan Marsden <jmarsden@fastmail.fm>,
- Daniel Glassey <wdg@debian.org>,
  Dmitrijs Ledkovs <dmitrij.ledkov@ubuntu.com>,
  Teus Benschop <teusjannette@gmail.com>,
  Roberto C. Sánchez <roberto@debian.org>
 Build-Depends: debhelper (>= 10), patchutils (>= 0.2.25), pkg-config, rcs,
- autoconf, autoconf-archive, libcurl4-openssl-dev, libssl-dev, zip, unzip,
+ cmake, libcurl4-openssl-dev, libssl-dev, zip, unzip,
  libmimetic-dev, dh-autoreconf, dh-sequence-systemd, libxml2-dev,
  libutf8proc-dev, libgumbo-dev, libtidy-dev, libicu-dev
 Standards-Version: 3.9.8

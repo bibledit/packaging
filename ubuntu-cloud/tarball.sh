@@ -17,17 +17,16 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 
-DEBIANSOURCE=`dirname $0`
-cd $DEBIANSOURCE
-DEBIANSOURCE=`pwd`
-echo Using Debian packaging source at $DEBIANSOURCE.
+set -e
+
+
+DEBIAN_SOURCE=$(dirname "$0")
+cd "$DEBIAN_SOURCE"
+DEBIAN_SOURCE=$(pwd)
+echo Using Debian packaging source at "$DEBIAN_SOURCE".
 
 
 rm -f ~/Desktop/bibledit-cloud*tar.gz
-
-
-# If the debian/README* or README.Debian files contain no useful content,
-# they should be updated with something useful, or else be removed.
 
 
 echo Remove unwanted files from the Debian packaging.
@@ -36,18 +35,17 @@ echo Remove macOS extended attributes fromm the packaging.
 # The attributes would make their way into the tarball,
 # get unpacked within Debian,
 # and would cause lintian errors.
-xattr -r -c *
+xattr -r -c ./*
 
 
 echo Remove macOS extended attributes fromm the core cloud library.
-CLOUDSOURCE="../../cloud"
-pushd $CLOUDSOURCE
-CLOUDSOURCE=`pwd`
-xattr -r -c *
+CLOUD_SOURCE="../../cloud"
+pushd $CLOUD_SOURCE
+CLOUD_SOURCE=$(pwd)
+xattr -r -c ./*
 echo Create a tarball of the core cloud library.
-rm -f bibledit*gz
-make dist
-if [ $? -ne 0 ]; then exit; fi
+rm -f build/bibledit*gz
+cmake --build build --target dist
 popd
 
 
@@ -59,53 +57,33 @@ popd
 # Another reason is that in this way it does not need to generate patches in the 'debian' folder.
 
 
-TMPDEBIAN=/tmp/bibledit-debian
-echo Unpack the tarball in working folder $TMPDEBIAN.
-rm -rf $TMPDEBIAN
-if [ $? -ne 0 ]; then exit; fi
-mkdir $TMPDEBIAN
-if [ $? -ne 0 ]; then exit; fi
-cd $TMPDEBIAN
-if [ $? -ne 0 ]; then exit; fi
-tar xf $CLOUDSOURCE/bibledit*gz
-if [ $? -ne 0 ]; then exit; fi
+TMP_DEBIAN=/tmp/bibledit-debian
+echo Unpack the tarball in working folder $TMP_DEBIAN.
+rm -rf $TMP_DEBIAN
+mkdir $TMP_DEBIAN
+cd $TMP_DEBIAN
+tar xf "$CLOUD_SOURCE"/build/bibledit*gz
 cd bibledit*
-if [ $? -ne 0 ]; then exit; fi
 
 
-echo Copy the Debian packaging source to $TMPDEBIAN
-cp -r $DEBIANSOURCE/debian .
+echo Copy the Debian packaging source to $TMP_DEBIAN
+cp -r "$DEBIAN_SOURCE"/debian .
 
 
-echo Change \"bibledit\" to \"bibledit-cloud\" in configuring code.
-sed -i.bak 's/share\/bibledit/share\/bibledit-cloud/g' configure.ac
-if [ $? -ne 0 ]; then exit; fi
-sed -i.bak 's/\[bibledit\]/\[bibledit-cloud\]/g' configure.ac
-if [ $? -ne 0 ]; then exit; fi
-rm configure.ac.bak
-if [ $? -ne 0 ]; then exit; fi
+echo Change the executable name from "server" to "bibledit-cloud".
+sed -i.bak 's/"server"/"bibledit-cloud"/g' CMakeLists.txt
+rm CMakeLists.txt.bak
 
 
-echo Set the name of the binary to bibledit-cloud.
-sed -i.bak 's/.*PROGRAMS.*/bin_PROGRAMS = bibledit-cloud/' Makefile.am
-if [ $? -ne 0 ]; then exit; fi
-sed -i.bak 's/server_/bibledit_cloud_/g' Makefile.am
-if [ $? -ne 0 ]; then exit; fi
-sed -i.bak '/unittest_/d' Makefile.am
-if [ $? -ne 0 ]; then exit; fi
-sed -i.bak '/generate_/d' Makefile.am
-if [ $? -ne 0 ]; then exit; fi
-rm Makefile.am.bak
-if [ $? -ne 0 ]; then exit; fi
+echo Change shared data from bibledit to bibledit-cloud.
+sed -i.bak 's/share\/bibledit/share\/bibledit-cloud/g' CMakeLists.txt
+rm CMakeLists.txt.bak
 
 
 echo Remove client man file.
 rm man/bibledit.1
-if [ $? -ne 0 ]; then exit; fi
-sed -i.bak 's/man\/bibledit\.1 //g' Makefile.am
-if [ $? -ne 0 ]; then exit; fi
-rm Makefile.am.bak
-if [ $? -ne 0 ]; then exit; fi
+sed -i.bak '/bibledit.1/d' CMakeLists.txt
+rm CMakeLists.txt.bak
 
 
 echo Remove some files from the core library
@@ -113,13 +91,9 @@ echo Remove some files from the core library
 # That script writes to the crontab.
 # Delete it so it can't be used accidentially.
 rm bibledit
-if [ $? -ne 0 ]; then exit; fi
 rm -f generate
-if [ $? -ne 0 ]; then exit; fi
 rm valgrind
-if [ $? -ne 0 ]; then exit; fi
 rm dev
-if [ $? -ne 0 ]; then exit; fi
 
 
 echo Disable mach.h definitions.
@@ -127,54 +101,35 @@ echo Disable mach.h definitions.
 # But it does not have the 64 bits statistics definitions.
 # It fails to compile there.
 # So disable them.
-sed -i.bak '/HAVE_MACH_MACH/d' configure.ac
-if [ $? -ne 0 ]; then exit; fi
-rm configure.ac.bak
-if [ $? -ne 0 ]; then exit; fi
-
-
-echo Reconfiguring the source.
-./reconfigure
-if [ $? -ne 0 ]; then exit; fi
-rm -rf autom4te.cache
-if [ $? -ne 0 ]; then exit; fi
+sed -i.bak '/HAVE_MACH_MACH/d' CMakeLists.txt
+rm CMakeLists.txt.bak
 
 
 echo Remove extra license files.
 # Fix for the lintian warnings "extra-license-file".
 find . -name COPYING -delete
-if [ $? -ne 0 ]; then exit; fi
 find . -name LICENSE -delete
-if [ $? -ne 0 ]; then exit; fi
 
 
 echo Remove extra font files.
 # Fix for the lintian warning "duplicate-font-file".
 rm fonts/SILEOT.ttf
-if [ $? -ne 0 ]; then exit; fi
 
 
-echo Configure and clean the source.
-./configure
-if [ $? -ne 0 ]; then exit; fi
+echo Clean the source.
 pkgdata/create.sh
-if [ $? -ne 0 ]; then exit; fi
-make distclean
-if [ $? -ne 0 ]; then exit; fi
 
 
 echo Create updated renamed tarball for Debian.
-cd $TMPDEBIAN
-OLDTARDIR=`ls`
-NEWTARDIR=${OLDTARDIR/bibledit/bibledit-cloud}
-mv $OLDTARDIR $NEWTARDIR
-tar czf $NEWTARDIR.tar.gz $NEWTARDIR
-if [ $? -ne 0 ]; then exit; fi
+cd $TMP_DEBIAN
+OLD_TAR_DIR=$(ls)
+NEW_TAR_DIR=${OLD_TAR_DIR/bibledit/bibledit-cloud}
+mv "$OLD_TAR_DIR" "$NEW_TAR_DIR"
+tar czf "$NEW_TAR_DIR".tar.gz "$NEW_TAR_DIR"
 
 
 echo Copy the Debian tarball to the Desktop.
-scp $TMPDEBIAN/*.gz ~/Desktop
-if [ $? -ne 0 ]; then exit; fi
+scp $TMP_DEBIAN/*.gz ~/Desktop
 
 
 echo Ready creating bibledit-cloud tarball for Debian.
