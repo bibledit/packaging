@@ -28,16 +28,16 @@ echo Create a tarball for Bibledit Cloud
 echo Updating the git repository that contains sources for Ubuntu packages
 
 
-LAUNCHPADUBUNTU=$HOME/dev/launchpad/ubuntu-cloud
-echo Local repository at $LAUNCHPADUBUNTU
-rm -rf $LAUNCHPADUBUNTU/*
+LAUNCHPAD_UBUNTU=$HOME/dev/launchpad/ubuntu-cloud
+echo Local repository at "$LAUNCHPAD_UBUNTU"
+rm -rf "$LAUNCHPAD_UBUNTU"/*
 
 
 echo Unpack the tarball from the Desktop
-tar --strip-components=1 -C $LAUNCHPADUBUNTU -xzf ~/Desktop/bibledit-cloud*tar.gz
+tar --strip-components=1 -C "$LAUNCHPAD_UBUNTU" -xzf ~/Desktop/bibledit-cloud*tar.gz
 
 
-pushd $LAUNCHPADUBUNTU
+pushd "$LAUNCHPAD_UBUNTU"
 find . -name .DS_Store -delete
 find . -name HasenundFrîsche.txt -delete
 echo Push data to Launchpad
