@@ -30,22 +30,22 @@ cp build/*.gz ~/Desktop
 popd
 
 
-LAUNCHPADUBUNTU=~/dev/launchpad/ubuntu-client-beta
-LAUNCHPADUBUNTU=`realpath $LAUNCHPADUBUNTU`
-echo Updating the code for creating Ubuntu beta packages in $LAUNCHPADUBUNTU
-rm -rf $LAUNCHPADUBUNTU/*
+LAUNCHPAD_UBUNTU=~/dev/launchpad/ubuntu-client-beta
+LAUNCHPAD_UBUNTU=$(realpath $LAUNCHPAD_UBUNTU)
+echo Updating the code for creating Ubuntu beta packages in "$LAUNCHPAD_UBUNTU"
+rm -rf "${LAUNCHPAD_UBUNTU:?}"/*
 
 
 echo Unpack tarball into the repository
-tar --strip-components=1 -C $LAUNCHPADUBUNTU -xzf ~/Desktop/bibledit-5*tar.gz
+tar --strip-components=1 -C "$LAUNCHPAD_UBUNTU" -xzf ~/Desktop/bibledit-5*tar.gz
 
 
 echo Add the debian folder to the repository
-cp -r debian $LAUNCHPADUBUNTU
+cp -r debian "$LAUNCHPAD_UBUNTU"
 
 
 echo Commit the code in the repository and push
-pushd $LAUNCHPADUBUNTU
+pushd "$LAUNCHPAD_UBUNTU"
 find . -name .DS_Store -delete
 git add .
 git commit -a -m "new upstream version"

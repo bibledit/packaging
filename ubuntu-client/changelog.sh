@@ -17,15 +17,21 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 
-VERSION=`grep "VERSION " ../../cloud/config.h | sed 's/#define VERSION //' | sed 's/"//g'`
-echo Updating the debian/changelog to $VERSION
-echo "bibledit ($VERSION-1) unstable; urgency=medium" > changelog
-echo >> changelog
-echo "  * new upstream version" >> changelog
-echo >> changelog
-echo -n " -- Teus Benschop <teusjannette@gmail.com>  " >> changelog
-date -R >> changelog
-echo >> changelog
+set -e
+pushd ../../cloud
+cmake -B build
+popd
+VERSION=$(grep -w VERSION ../../cloud/config.h | sed 's/#define VERSION //' | sed 's/"//g')
+echo Updating the debian/changelog to "$VERSION"
+{
+  echo "bibledit ($VERSION-1) unstable; urgency=medium";
+  echo;
+  echo "  * new upstream version";
+  echo;
+  echo -n " -- Teus Benschop <teusjannette@gmail.com>  ";
+  date -R;
+  echo;
+} > changelog
 cat debian/changelog >> changelog
 cp changelog debian/changelog
 #cp changelog debian2017/changelog

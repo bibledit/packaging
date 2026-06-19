@@ -30,7 +30,7 @@ echo Updating the git repository that contains sources for Ubuntu beta packages
 
 LAUNCHPAD_UBUNTU=$HOME/dev/launchpad/ubuntu-cloud-beta
 echo Local repository at "$LAUNCHPAD_UBUNTU"
-rm -rf "$LAUNCHPAD_UBUNTU"/*
+rm -rf "${LAUNCHPAD_UBUNTU:?}"/*
 
 
 echo Unpack the tarball from the Desktop
