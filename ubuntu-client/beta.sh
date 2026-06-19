@@ -23,7 +23,11 @@ set -e
 
 echo Create a tarball for the Linux Client
 rm -f ~/Desktop/bibledit-5*.tar.gz
-../../linux/tarball-macos.sh
+pushd ../../cloud
+rm build/*.gz
+cmake --build build --target dist
+cp build/*.gz ~/Desktop
+popd
 
 
 LAUNCHPADUBUNTU=~/dev/launchpad/ubuntu-client-beta

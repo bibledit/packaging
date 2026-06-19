@@ -17,7 +17,7 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 
-VERSION=`grep PACKAGE_VERSION ../../cloud/config.h | sed 's/#define PACKAGE_VERSION //' | sed 's/"//g'`
+VERSION=`grep "VERSION " ../../cloud/config.h | sed 's/#define VERSION //' | sed 's/"//g'`
 echo Updating the debian/changelog to $VERSION
 echo "bibledit ($VERSION-1) unstable; urgency=medium" > changelog
 echo >> changelog
