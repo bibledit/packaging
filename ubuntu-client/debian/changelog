@@ -1,6 +1,6 @@
 bibledit (5.1.055-2) unstable; urgency=medium
 
-  * requires libcurl4-...-dev
+  * Enable client, disable unit tests
 
  -- Teus Benschop <teusjannette@gmail.com>  Fri, 19 Jun 2026 18:45:58 +0200
 
