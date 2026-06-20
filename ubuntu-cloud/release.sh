@@ -30,7 +30,7 @@ echo Updating the git repository that contains sources for Ubuntu packages
 
 LAUNCHPAD_UBUNTU=$HOME/dev/launchpad/ubuntu-cloud
 echo Local repository at "$LAUNCHPAD_UBUNTU"
-rm -rf "$LAUNCHPAD_UBUNTU"/*
+rm -rf "${LAUNCHPAD_UBUNTU:?}"/*
 
 
 echo Unpack the tarball from the Desktop
@@ -48,4 +48,3 @@ popd
 
 
 echo Ready
-
