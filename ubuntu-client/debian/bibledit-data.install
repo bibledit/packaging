@@ -45,7 +45,6 @@ usr/share/bibledit/index
 usr/share/bibledit/ipc
 usr/share/bibledit/jobs
 usr/share/bibledit/journal
-usr/share/bibledit/jsonxx
 usr/share/bibledit/ldap
 usr/share/bibledit/lexicon
 usr/share/bibledit/library
@@ -75,14 +74,12 @@ usr/share/bibledit/read
 usr/share/bibledit/related
 usr/share/bibledit/resource
 usr/share/bibledit/revisions
-usr/share/bibledit/rss
 usr/share/bibledit/search
 usr/share/bibledit/sendreceive
 usr/share/bibledit/session
 usr/share/bibledit/setup
 usr/share/bibledit/slip
 usr/share/bibledit/sources
-usr/share/bibledit/sprint
 usr/share/bibledit/sqlite
 usr/share/bibledit/statistics
 usr/share/bibledit/stb

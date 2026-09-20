@@ -44,7 +44,6 @@ usr/share/bibledit-cloud/index
 usr/share/bibledit-cloud/ipc
 usr/share/bibledit-cloud/jobs
 usr/share/bibledit-cloud/journal
-usr/share/bibledit-cloud/jsonxx
 usr/share/bibledit-cloud/ldap
 usr/share/bibledit-cloud/lexicon
 usr/share/bibledit-cloud/library
@@ -74,14 +73,12 @@ usr/share/bibledit-cloud/read
 usr/share/bibledit-cloud/related
 usr/share/bibledit-cloud/resource
 usr/share/bibledit-cloud/revisions
-usr/share/bibledit-cloud/rss
 usr/share/bibledit-cloud/search
 usr/share/bibledit-cloud/sendreceive
 usr/share/bibledit-cloud/session
 usr/share/bibledit-cloud/setup
 usr/share/bibledit-cloud/slip
 usr/share/bibledit-cloud/sources
-usr/share/bibledit-cloud/sprint
 usr/share/bibledit-cloud/sqlite
 usr/share/bibledit-cloud/statistics
 usr/share/bibledit-cloud/stb
